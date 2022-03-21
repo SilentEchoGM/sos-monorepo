@@ -59,7 +59,7 @@
       "target": [
         "nsis"
       ],
-      "icon": "../svelte/graphics/sos-emu.ico"
+      "icon": "../emulator-svelte/graphics/sos-emu.ico"
     },
     "directories": {
       "output": "../../release/sos-emulator/${version}"
