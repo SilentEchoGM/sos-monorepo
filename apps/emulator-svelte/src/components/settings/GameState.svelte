@@ -47,6 +47,13 @@
     </div>
     <div class="row" id="line4">
       <NumberInput bind:value={$state.game.time} label={"time"} code />
+      <button on:click={() => ($state.game.ticking = !$state.game.ticking)}
+        >{$state.game.ticking ? "Stop" : "Start"}</button>
+      <button
+        on:click={() => {
+          $state.game.time = 300;
+          $state.game.ticking = false;
+        }}>Reset</button>
       <BooleanInput bind:checked={$state.game.isOT} label={"isOT"} code />
       <BooleanInput
         bind:checked={$state.game.isReplay}
@@ -80,6 +87,6 @@
     grid-template-columns: 10em 15em 10em 15em;
   }
   #line4 {
-    grid-template-columns: 10em 15em 10em 2em 9em 2em;
+    grid-template-columns: 10em 5em 4em 4em 10em 2em 9em 2em;
   }
 </style>

@@ -17,6 +17,8 @@ const defaultGameState = {
   isOT: false,
   isReplay: false,
   statType: "Shot on Goal",
+  ticking: false,
+  lastTick: Date.now(),
 };
 
 export type GameState = Omit<typeof defaultGameState, "statType"> & {

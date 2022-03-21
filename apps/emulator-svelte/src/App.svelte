@@ -10,8 +10,37 @@
   import Playback from "./components/modes/Playback.svelte";
   import Recording from "./components/modes/Recording.svelte";
   import { socket } from "./socket";
+  import { sendPacket } from "./sendPacket";
+  import { derived } from "svelte/store";
+
+  const gameTick = () => {
+    const dt = Date.now() - $state.game.lastTick;
+    if (!$state.game.ticking) {
+      requestAnimationFrame(gameTick);
+      return;
+    }
+
+    if (dt > 1000) {
+      $state.game.lastTick = Date.now();
+      $state.game.time--;
+      sendPacket("game:clock_updated_seconds");
+      sendPacket("game:update_state");
+    }
+
+    console.log("lastTick", dt);
+    requestAnimationFrame(gameTick);
+  };
+
+  const ticking = derived(state, ($state) => $state.game.ticking);
+  if (!$state.game.lastTick) $state.game.lastTick = 0;
+
+  $: if ($ticking) sendPacket("game:clock_started");
+  $: if (!$ticking) sendPacket("game:clock_stopped");
 
   onMount(() => {
+    if (!$state.game.time && $state.game.time !== 0) $state.game.time = 300;
+    $state.game.ticking = false;
+    gameTick();
     if (keys($state.players).length === 0) {
       const playerStore = getPlayerStore();
       for (let player in playerStore) {
