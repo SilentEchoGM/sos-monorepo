@@ -1,0 +1,42 @@
+{
+  "name": "sos-emulator-svelte",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public --no-clear --port 34952",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "@tsconfig/svelte": "^2.0.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0",
+    "svelte-check": "^2.0.0",
+    "svelte-preprocess": "^4.0.0",
+    "tslib": "^2.0.0",
+    "typescript": "^4.0.0"
+  },
+  "dependencies": {
+    "fp-ts": "^2.11.8",
+    "localforage": "^1.10.0",
+    "sirv-cli": "^2.0.0",
+    "uuid": "^8.3.2",
+    "socket.io-client": "~4.4.1",
+    "sos-plugin-types": "1.0.0",
+    "svelte-knobby": "^0.3.4",
+    "svelte-fsm": "~1.1.2",
+    "@syncedstore/core": "~0.3.7",
+    "@syncedstore/svelte": "~0.3.6",
+    "yjs": "~13.5.28",
+    "y-indexeddb": "~9.0.7",
+    "sos-emulator-types": "1.0.0"
+  }
+}

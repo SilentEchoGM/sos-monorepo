@@ -1,0 +1,105 @@
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("/fonts/OpenDyslexic-Bold.otf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("/fonts/OpenDyslexic-BoldItalic.otf");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("/fonts/OpenDyslexic-Italic.otf");
+  font-style: italic;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("/fonts/OpenDyslexic-Regular.otf");
+}
+@font-face {
+  font-family: "OpenDyslexicMono";
+  src: url("/fonts/OpenDyslexicMono-Regular.otf");
+}
+
+:root {
+  --neutral: #bcdbb6;
+  --blue: #6094a8;
+  --orange: #bb745a;
+  --purple: #33303d;
+  --gray: #5e5f5f;
+  --maroon: rgba(255, 0, 0, 0.377);
+  font-family: OpenDyslexic;
+  font-weight: bold;
+}
+
+html {
+  background-color: #364225;
+  color: #d3d3d3;
+}
+
+button {
+  font-family: OpenDyslexic;
+  font-weight: bold;
+  background-color: #999;
+  border: none;
+  border-radius: 0.4em;
+  font-size: large;
+}
+
+.panel {
+  background-color: #33303d;
+  border-radius: 0.4em;
+  padding: 1em;
+  padding-left: 2em;
+  margin: 1em;
+}
+
+input {
+  all: unset;
+  border-radius: 0.4em;
+  height: 2.1rem;
+  padding-left: 1em;
+  color: #000000;
+  font-weight: bold;
+  background-color: var(--neutral);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+button:hover {
+  background-color: #5e5f5f;
+}
+
+button:active {
+  background-color: #535555;
+}
+
+.container {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.grid {
+  display: grid;
+  align-items: baseline;
+  gap: 1em;
+}
+
+h2 {
+  position: relative;
+  color: #a07a5d;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  left: -0.3em;
+}
+::-webkit-scrollbar {
+  display: none;
+}
