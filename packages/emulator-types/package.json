@@ -1,0 +1,24 @@
+{
+  "name": "sos-emulator-types",
+  "version": "1.0.0",
+  "description": "TypeScript typings and string constants for sos-emulator for the SOS plugin for Bakkesmod",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SilentEchoUK/sos-packages.git"
+  },
+  "author": "SilentEcho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SilentEchoUK/sos-packages/issues"
+  },
+  "homepage": "https://github.com/SilentEchoUK/sos-packages#readme",
+  "dependencies": {"sos-plugin-types":"1.0.0"},
+  "devDependencies": {
+    "typescript": "^4.0.0"
+  }
+}
