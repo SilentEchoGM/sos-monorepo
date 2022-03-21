@@ -1,5 +1,4 @@
 {
-  "i18n-ally.localesPaths": [
-    "release/sos-emulator/0.2.1/win-unpacked/locales"
-  ]
+  "i18n-ally.localesPaths": ["release/sos-emulator/0.2.1/win-unpacked/locales"],
+  "cSpell.words": ["syncedstore"]
 }
