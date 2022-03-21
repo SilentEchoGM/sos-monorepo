@@ -4,26 +4,10 @@ A simple emulator for the SOS plugin for Bakkesmod, intended for use testing Roc
 
 Currently set up to start on port 49122 so if you have Rocket League running with SOS set to port 49122, bad things will happen.
 
-Use `rush add` from the relevant project folder to add dependencies. If you use npm or any other package manager, it can mess up the monorepo. Reference [here.](https://rushjs.io/pages/developer/new_developer/)
+To install everything in the repo, run yarn install from the root directory.
 
-## Install
+To start the dev process run `cd apps/emulator-electron` and then `yarn start`
 
-1. Install Rush globally: `npm i -g @microsoft/rush`
-2. Install the dependencies of the monorepo with `rush update`
-
-## Development Process
-
-1. `rush build`
-1. `cd emulator-electron`
-1. `rushx start`
-
-## Build for Distribution
-
-1. `rush build`
-2. `rush dist-electron`
-
-## Next?
-
-- Currently only the core scorebug relevant attributes are dynamic but the intention is to eventually have all event dynamic properties configurable.
-- Event simulator (ie, click a button for a goal and the relevant SOS events will be generated and sent at the appropriate time intervals to simulate a goal occurring).
-- Game playback (listen to SOS and store all packets for later playback).
+Uses Turborepo to build and package:
+  * run `npx turbo run build` to build
+  * run `npx turbo run dist` to package
