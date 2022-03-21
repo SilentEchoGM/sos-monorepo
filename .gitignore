@@ -31,3 +31,7 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+win-unpacked
+packages/plugin-includes/*/doc
+packages/plugin-includes/*/docs
