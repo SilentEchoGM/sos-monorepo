@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "outDir": "build",
+    "declaration": true,
+    "composite": true,
+    "declarationMap": true,
+    "incremental": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "target": "ES2020",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "module": "commonjs"
+  }
+}
