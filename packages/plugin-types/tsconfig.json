@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "composite": true,
+    "declarationMap": true,
+    "incremental": true,
+    "lib": ["ES2015"]
+  }
+}

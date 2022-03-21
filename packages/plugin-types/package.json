@@ -1,0 +1,24 @@
+{
+  "name": "sos-plugin-types",
+  "version": "1.0.0",
+  "description": "TypeScript typings and string constants for the SOS plugin for Bakkesmod",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SilentEchoUK/sos-packages.git"
+  },
+  "author": "SilentEcho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SilentEchoUK/sos-packages/issues"
+  },
+  "homepage": "https://github.com/SilentEchoUK/sos-packages#readme",
+  "dependencies": {"fp-ts":"^2.11.8"},
+  "devDependencies": {
+    "typescript": "^4.0.0"
+  }
+}
