@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\CanvasExtensions.cpp">
+      <Filter>RenderingTools\Extra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingAssistant.cpp">
+      <Filter>RenderingTools\Extra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingMath.cpp">
+      <Filter>RenderingTools\Extra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\WrapperStructsExtensions.cpp">
+      <Filter>RenderingTools\Extra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Chevron.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Circle.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Circle2D.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Cone.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Cube.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Cylinder.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Frustum.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Grid.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Line.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Matrix3.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Plane.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Sphere.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Triangle.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\VisualCamera.cpp">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\BallSpeedManager.cpp">
+      <Filter>Plugin Code\Classes\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\ClockManager.cpp">
+      <Filter>Plugin Code\Classes\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\NameplatesManager.cpp">
+      <Filter>Plugin Code\Classes\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\WebsocketManager.cpp">
+      <Filter>Plugin Code\Classes\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Plugin\SOS.cpp">
+      <Filter>Plugin Code\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Plugin\DebugRenderer.cpp">
+      <Filter>Plugin Code\Support Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Plugin\EventHooks.cpp">
+      <Filter>Plugin Code\Support Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Plugin\GameState.cpp">
+      <Filter>Plugin Code\Support Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Plugin\SOSUtils.cpp">
+      <Filter>Plugin Code\Support Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\CanvasExtensions.h">
+      <Filter>RenderingTools\Extra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingAssistant.h">
+      <Filter>RenderingTools\Extra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingMath.h">
+      <Filter>RenderingTools\Extra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\WrapperStructsExtensions.h">
+      <Filter>RenderingTools\Extra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Chevron.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Circle.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Circle2D.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Cone.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Cube.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Cylinder.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Frustum.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Grid.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Line.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Matrix3.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Plane.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Sphere.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Triangle.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\VisualCamera.h">
+      <Filter>RenderingTools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\RenderingTools.h">
+      <Filter>RenderingTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\BallSpeedManager.h">
+      <Filter>Plugin Code\Classes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\ClockManager.h">
+      <Filter>Plugin Code\Classes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\NameplatesManager.h">
+      <Filter>Plugin Code\Classes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\WebsocketManager.h">
+      <Filter>Plugin Code\Classes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Plugin\SOS.h">
+      <Filter>Plugin Code\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Plugin\MacrosStructsEnums.h">
+      <Filter>Plugin Code\Support Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Plugin\SOSUtils.h">
+      <Filter>Plugin Code\Support Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Filter>Extra Files</Filter>
+    </None>
+    <None Include="UI\sos.set">
+      <Filter>Plugin Code\UI</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Plugin Code">
+      <UniqueIdentifier>{d12b4e4f-89da-4843-b3f8-37d1af6a6e33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extra Files">
+      <UniqueIdentifier>{5eb95e02-e513-42f5-8a62-b9a1c3878cb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderingTools">
+      <UniqueIdentifier>{9a319660-3879-48e8-959d-7d747f25cd8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderingTools\Objects">
+      <UniqueIdentifier>{4da041f3-3336-4754-9313-2e0cf70d52df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderingTools\Extra">
+      <UniqueIdentifier>{aa9f2b67-d072-40be-8250-381ecab95ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugin Code\Classes">
+      <UniqueIdentifier>{04228b70-6675-479e-97e7-5f5206c9eb0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugin Code\UI">
+      <UniqueIdentifier>{95d81ead-3f4d-4ae0-87cb-dc3816f49be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugin Code\Classes\Headers">
+      <UniqueIdentifier>{858920aa-8857-4d39-994e-ce5f162f8d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugin Code\Classes\Implementations">
+      <UniqueIdentifier>{26474f1c-8c7b-42b5-87af-26471fe0eb3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugin Code\Main">
+      <UniqueIdentifier>{aaf0ba0e-8d71-4615-992f-d36e53f09991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugin Code\Support Files">
+      <UniqueIdentifier>{69bffb0f-5c45-41e1-82e3-0f6a5881d8cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

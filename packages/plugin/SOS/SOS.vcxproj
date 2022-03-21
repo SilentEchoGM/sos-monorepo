@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release-Nameplates|x64">
+      <Configuration>Release-Nameplates</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{DCA29E11-A90E-4840-B2AE-BFCC4EA5B444}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BakkesTest</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>SOS</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Nameplates|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="BakkesMod.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Nameplates|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="BakkesMod.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>E:\Projects\sos\sos-plugin\sos-plugin-includes;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)..\release\sos-plugin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Nameplates|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;BAKKESTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)sos-plugin-includes\RenderingTools;$(SolutionDir)sos-plugin-includes\nlohmann-JSON;$(SolutionDir)sos-plugin-includes\asio-1.12.2\include;$(SolutionDir)sos-plugin-includes\websocketpp-0.8.1;$(BakkesModPath)\bakkesmodsdk\include;$(ProjectDir)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile />
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(BakkesModPath)\bakkesmodsdk\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Nameplates|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>USE_NAMEPLATES;NDEBUG;BAKKESTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)sos-plugin-includes\RenderingTools;$(SolutionDir)sos-plugin-includes\nlohmann-JSON;$(SolutionDir)sos-plugin-includes\asio-1.12.2\include;$(SolutionDir)sos-plugin-includes\websocketpp-0.8.1;$(BakkesModPath)\bakkesmodsdk\include;$(ProjectDir)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(BakkesModPath)\bakkesmodsdk\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\CanvasExtensions.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingAssistant.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingMath.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\WrapperStructsExtensions.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Chevron.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Circle.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Circle2D.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Cone.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Cube.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Cylinder.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Frustum.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Grid.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Line.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Matrix3.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Plane.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Sphere.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Triangle.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\VisualCamera.h" />
+    <ClInclude Include="..\sos-plugin-includes\RenderingTools\RenderingTools.h" />
+    <ClInclude Include="Classes\BallSpeedManager.h" />
+    <ClInclude Include="Classes\ClockManager.h" />
+    <ClInclude Include="Classes\NameplatesManager.h" />
+    <ClInclude Include="Classes\WebsocketManager.h" />
+    <ClInclude Include="Plugin\MacrosStructsEnums.h" />
+    <ClInclude Include="Plugin\SOS.h" />
+    <ClInclude Include="Plugin\SOSUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\CanvasExtensions.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingAssistant.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingMath.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\WrapperStructsExtensions.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Chevron.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Circle.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Circle2D.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Cone.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Cube.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Cylinder.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Frustum.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Grid.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Line.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Matrix3.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Plane.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Sphere.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Triangle.cpp" />
+    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\VisualCamera.cpp" />
+    <ClCompile Include="Classes\BallSpeedManager.cpp" />
+    <ClCompile Include="Classes\ClockManager.cpp" />
+    <ClCompile Include="Classes\NameplatesManager.cpp" />
+    <ClCompile Include="Classes\WebsocketManager.cpp" />
+    <ClCompile Include="Plugin\DebugRenderer.cpp" />
+    <ClCompile Include="Plugin\EventHooks.cpp" />
+    <ClCompile Include="Plugin\GameState.cpp" />
+    <ClCompile Include="Plugin\SOS.cpp" />
+    <ClCompile Include="Plugin\SOSUtils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+    <None Include="UI\sos.set" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
