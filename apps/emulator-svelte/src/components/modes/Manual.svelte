@@ -58,6 +58,8 @@
     const packet = fn(data);
     $socket = { channel: "send-packet", data: packet };
   };
+
+  $: $state.players, sendEvent("game:update_state");
 </script>
 
 <WssError />
