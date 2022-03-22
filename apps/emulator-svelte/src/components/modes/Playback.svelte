@@ -5,7 +5,7 @@
   import WssError from "../errors/Wss.svelte";
   import SelectInput from "../inputs/SelectInput.svelte";
   import { writable } from "svelte/store";
-  import { stat } from "../../stores";
+  import { gameId, stat } from "../../stores";
 
   onMount(async () => {
     $socket = {
@@ -102,7 +102,7 @@
             channel: "load-playback",
             data: $state.playback.gameId,
           };
-
+          $state.game.ticking = false
           await tick();
         }
         $socket = {
