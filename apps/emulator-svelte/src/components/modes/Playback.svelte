@@ -102,9 +102,10 @@
             channel: "load-playback",
             data: $state.playback.gameId,
           };
-          $state.game.ticking = false
           await tick();
         }
+        $state.game.ticking = false;
+
         $socket = {
           channel: "start-playback",
           data: null,
