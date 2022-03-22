@@ -12,7 +12,9 @@
   import { socket } from "./socket";
   import { sendPacket } from "./sendPacket";
   import { derived } from "svelte/store";
-
+  import { SOS, sosEvents } from "sos-plugin-types";
+  import { pipe } from "fp-ts/lib/function";
+  import { array as A } from "fp-ts";
   const gameTick = () => {
     const dt = Date.now() - $state.game.lastTick;
     if (!$state.game.ticking) {
@@ -38,6 +40,17 @@
   $: if (!$ticking) sendPacket("game:clock_stopped");
 
   onMount(() => {
+    if (!$state.ui.packetWeights) {
+      $state.ui.packetWeights = pipe(
+        [...sosEvents],
+        A.reduce({} as Record<SOS.Event, number>, (acc, event) => {
+          return {
+            ...acc,
+            [event]: 1,
+          };
+        })
+      );
+    }
     if (!$state.game.time && $state.game.time !== 0) $state.game.time = 300;
     $state.game.ticking = false;
     gameTick();

@@ -31,6 +31,7 @@ export type UIState = {
   emulatorModeOpen: boolean;
   wssError: boolean;
   recordingListenerError: boolean;
+  packetWeights: Record<SOS.Event, number>;
 };
 
 export enum EmulatorMode {
