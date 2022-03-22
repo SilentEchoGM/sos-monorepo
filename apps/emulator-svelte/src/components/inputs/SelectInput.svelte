@@ -8,6 +8,7 @@
   export let color: Color = Color.neutral;
   export let code = false;
   export let options: string[] = [];
+  export let nullable = false;
 
   const dispatch = createEventDispatcher();
 
@@ -59,6 +60,15 @@
   </div>
   {#if expanded}
     <div class="dropdown" id="click-target" style:width={selectEl.offsetWidth}>
+      {#if nullable}
+        <span
+          class="option"
+          on:click={() => {
+            value = "";
+            expanded = false;
+            document.removeEventListener("click", clickHandler);
+          }}>None</span>
+      {/if}
       {#each options as option}
         <span
           class="option"
@@ -70,8 +80,6 @@
           }}>
           {option}
         </span>
-      {:else}
-        No games found
       {/each}
     </div>
   {/if}
