@@ -61,7 +61,12 @@
         code />
     </div>
     <div id="line5" class="row">
-      <TextInput bind:value={$state.game.target} label={"target"} code />
+      <SelectInput
+        bind:value={$state.game.target}
+        label={"target"}
+        code
+        nullable
+        options={[...Object.keys($state.players)]} />
       <SelectInput
         bind:value={$state.game.statType}
         label="statType"
@@ -87,6 +92,6 @@
     grid-template-columns: 10em 15em 10em 15em;
   }
   #line4 {
-    grid-template-columns: 10em 5em 4em 4em 10em 2em 9em 2em;
+    grid-template-columns: 10em 4.5em 4em 4.5em 10em 2em 9em 2em;
   }
 </style>
