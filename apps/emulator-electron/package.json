@@ -1,6 +1,6 @@
 {
   "name": "sos-emulator-electron",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "The electron wrapper for the SOS emulator.",
   "main": "build/main.js",
   "scripts": {
