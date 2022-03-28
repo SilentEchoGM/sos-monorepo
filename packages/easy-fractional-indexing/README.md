@@ -19,6 +19,12 @@ A convenient wrapper around [fractional-indexing](https://github.com/rocicorp/fr
 <dt><a href="#getStartIndex">getStartIndex()</a> ⇒ <code>string</code></dt>
 <dd><p>Get the starting index for a new list.</p>
 </dd>
+<dt><a href="#prepend">prepend([currentIndexes])</a> ⇒ <code>string</code></dt>
+<dd><p>Given a list of indices, get a new index for prepending a new index to the list.</p>
+</dd>
+<dt><a href="#append">append([currentIndexes])</a> ⇒ <code>string</code></dt>
+<dd><p>Given a list of indices, get a new index for appending a new index to the list.</p>
+</dd>
 </dl>
 
 <a name="generateKeyBetween"></a>
@@ -80,3 +86,25 @@ Given a list of indices, get a new index for moving current index down one posit
 Get the starting index for a new list.
 
 **Kind**: global function  
+<a name="prepend"></a>
+
+## prepend([currentIndexes]) ⇒ <code>string</code>
+Given a list of indices, get a new index for prepending a new index to the list.
+
+**Kind**: global function  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [currentIndexes] | <code>Array.&lt;string&gt;</code> | <code>[]</code> | 
+
+<a name="append"></a>
+
+## append([currentIndexes]) ⇒ <code>string</code>
+Given a list of indices, get a new index for appending a new index to the list.
+
+**Kind**: global function  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [currentIndexes] | <code>Array.&lt;string&gt;</code> | <code>[]</code> | 
+

@@ -1,5 +1,5 @@
-import { pipe } from "fp-ts/function";
 import { array as A, option as O, string as S } from "fp-ts";
+import { pipe } from "fp-ts/function";
 import {
   /**
    * @function generateKeyBetween
@@ -9,7 +9,7 @@ import {
    */
   generateKeyBetween,
   /**
-   * @function generateKeyBetween
+   * @function generateNKeysBetween
    * @param {(string | null)} a
    * @param {(string | null)} b
    * @param {number} n
@@ -18,12 +18,14 @@ import {
   generateNKeysBetween,
 } from "fractional-indexing";
 
+export { generateKeyBetween, generateNKeysBetween };
+
 /**
  * Base movement function, use `moveUp` or `moveDown` instead.
  * @function move
  */
 export const move =
-  (up = false /* @type{moveUp|moveDown} */) =>
+  (up = false) =>
   (allIndexes: string[] = [], currentIndex: string = "") => {
     const sorted = A.sort(S.Ord)(allIndexes);
     const last: string | null = pipe(
@@ -77,6 +79,32 @@ export const moveDown = move(false);
  * Get the starting index for a new list.
  * @returns {string}
  */
-export const getStartIndex = () => generateKeyBetween(null, null);
+export const getStartIndex = (): string => generateKeyBetween(null, null);
 
-export { generateKeyBetween, generateNKeysBetween };
+/**
+ * Given a list of indices, get a new index for prepending a new index to the list.
+ * @param {Array<string>} [currentIndexes=[]]
+ * @returns {string}
+ */
+export const prepend = (allIndexes: string[] = []): string =>
+  pipe(
+    allIndexes,
+    A.sort(S.Ord),
+    A.head,
+    O.map((head) => generateKeyBetween(null, head)),
+    O.getOrElse(getStartIndex)
+  );
+
+/**
+ * Given a list of indices, get a new index for appending a new index to the list.
+ * @param {Array<string>} [currentIndexes=[]]
+ * @returns {string}
+ */
+export const append = (allIndexes: string[] = []): string =>
+  pipe(
+    allIndexes,
+    A.sort(S.Ord),
+    A.last,
+    O.map((last) => generateKeyBetween(last, null)),
+    O.getOrElse(getStartIndex)
+  );
