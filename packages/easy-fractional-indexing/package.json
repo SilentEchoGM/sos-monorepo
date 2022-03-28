@@ -1,6 +1,6 @@
 {
   "name": "easy-fractional-indexing",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "author": "SilentEcho",
   "license": "CC0-1.0",
   "main": "dist/index.js",
