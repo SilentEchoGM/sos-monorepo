@@ -6,7 +6,8 @@
     "declarationMap": true,
     "incremental": true,
     "rootDir": "src",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "sourceMap": true
   },
   "exclude": ["tests"],
   "include": ["src"]
