@@ -1,11 +1,10 @@
-A convenient wrapper around [fractional-indexing](https://github.com/rocicorp/fractional-indexing/).
-
+A convenient wrapper around [fractional-indexing](https://github.com/rocicorp/fractional-indexing/), sticking with version 2.1.0 of that library since ESM only modules are currently inconvenient for small Electron projects.
 ## Functions
 
 <dl>
-<dt><a href="#generateKeyBetween">generateKeyBetween(a, b, [digits])</a></dt>
+<dt><a href="#generateKeyBetweenRe-export of `fractional-indexing`s `generateKeyBetween`">generateKeyBetweenRe-export of `fractional-indexing`s `generateKeyBetween`(a, b, [digits])</a></dt>
 <dd></dd>
-<dt><a href="#generateKeyBetween">generateKeyBetween(a, b, n, [digits])</a></dt>
+<dt><a href="#generateNKeysBetweenRe-export of `fractional-indexing`s `generateNKeysBetween`">generateNKeysBetweenRe-export of `fractional-indexing`s `generateNKeysBetween`(a, b, n, [digits])</a></dt>
 <dd></dd>
 <dt><a href="#move">move()</a></dt>
 <dd><p>Base movement function, use <code>moveUp</code> or <code>moveDown</code> instead.</p>
@@ -27,9 +26,9 @@ A convenient wrapper around [fractional-indexing](https://github.com/rocicorp/fr
 </dd>
 </dl>
 
-<a name="generateKeyBetween"></a>
+<a name="generateKeyBetweenRe-export of `fractional-indexing`s `generateKeyBetween`"></a>
 
-## generateKeyBetween(a, b, [digits])
+## generateKeyBetweenRe-export of `fractional-indexing`s `generateKeyBetween`(a, b, [digits])
 **Kind**: global function  
 
 | Param | Type |
@@ -38,9 +37,9 @@ A convenient wrapper around [fractional-indexing](https://github.com/rocicorp/fr
 | b | <code>string</code> \| <code>null</code> | 
 | [digits] | <code>string</code> \| <code>undefined</code> | 
 
-<a name="generateKeyBetween"></a>
+<a name="generateNKeysBetweenRe-export of `fractional-indexing`s `generateNKeysBetween`"></a>
 
-## generateKeyBetween(a, b, n, [digits])
+## generateNKeysBetweenRe-export of `fractional-indexing`s `generateNKeysBetween`(a, b, n, [digits])
 **Kind**: global function  
 
 | Param | Type |
