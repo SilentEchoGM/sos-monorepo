@@ -3,6 +3,7 @@ import { pipe } from "fp-ts/function";
 import {
   /**
    * @function generateKeyBetween
+   * Re-export of `fractional-indexing`'s `generateKeyBetween`
    * @param {(string | null)} a
    * @param {(string | null)} b
    * @param {(string | undefined)} [digits]
@@ -10,6 +11,7 @@ import {
   generateKeyBetween,
   /**
    * @function generateNKeysBetween
+   * Re-export of `fractional-indexing`'s `generateNKeysBetween`
    * @param {(string | null)} a
    * @param {(string | null)} b
    * @param {number} n
