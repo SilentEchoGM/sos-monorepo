@@ -2,16 +2,18 @@ import { array as A, option as O, string as S } from "fp-ts";
 import { pipe } from "fp-ts/function";
 import {
   /**
-   * @function generateKeyBetween
    * Re-export of `fractional-indexing`'s `generateKeyBetween`
+   *
+   * @function generateKeyBetween
    * @param {(string | null)} a
    * @param {(string | null)} b
    * @param {(string | undefined)} [digits]
    */
   generateKeyBetween,
   /**
-   * @function generateNKeysBetween
    * Re-export of `fractional-indexing`'s `generateNKeysBetween`
+   *
+   * @function generateNKeysBetween
    * @param {(string | null)} a
    * @param {(string | null)} b
    * @param {number} n

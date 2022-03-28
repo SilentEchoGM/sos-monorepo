@@ -2,10 +2,12 @@ A convenient wrapper around [fractional-indexing](https://github.com/rocicorp/fr
 ## Functions
 
 <dl>
-<dt><a href="#generateKeyBetweenRe-export of `fractional-indexing`s `generateKeyBetween`">generateKeyBetweenRe-export of `fractional-indexing`s `generateKeyBetween`(a, b, [digits])</a></dt>
-<dd></dd>
-<dt><a href="#generateNKeysBetweenRe-export of `fractional-indexing`s `generateNKeysBetween`">generateNKeysBetweenRe-export of `fractional-indexing`s `generateNKeysBetween`(a, b, n, [digits])</a></dt>
-<dd></dd>
+<dt><a href="#generateKeyBetween">generateKeyBetween(a, b, [digits])</a></dt>
+<dd><p>Re-export of <code>fractional-indexing</code>&#39;s <code>generateKeyBetween</code></p>
+</dd>
+<dt><a href="#generateNKeysBetween">generateNKeysBetween(a, b, n, [digits])</a></dt>
+<dd><p>Re-export of <code>fractional-indexing</code>&#39;s <code>generateNKeysBetween</code></p>
+</dd>
 <dt><a href="#move">move()</a></dt>
 <dd><p>Base movement function, use <code>moveUp</code> or <code>moveDown</code> instead.</p>
 </dd>
@@ -26,9 +28,11 @@ A convenient wrapper around [fractional-indexing](https://github.com/rocicorp/fr
 </dd>
 </dl>
 
-<a name="generateKeyBetweenRe-export of `fractional-indexing`s `generateKeyBetween`"></a>
+<a name="generateKeyBetween"></a>
 
-## generateKeyBetweenRe-export of `fractional-indexing`s `generateKeyBetween`(a, b, [digits])
+## generateKeyBetween(a, b, [digits])
+Re-export of `fractional-indexing`'s `generateKeyBetween`
+
 **Kind**: global function  
 
 | Param | Type |
@@ -37,9 +41,11 @@ A convenient wrapper around [fractional-indexing](https://github.com/rocicorp/fr
 | b | <code>string</code> \| <code>null</code> | 
 | [digits] | <code>string</code> \| <code>undefined</code> | 
 
-<a name="generateNKeysBetweenRe-export of `fractional-indexing`s `generateNKeysBetween`"></a>
+<a name="generateNKeysBetween"></a>
 
-## generateNKeysBetweenRe-export of `fractional-indexing`s `generateNKeysBetween`(a, b, n, [digits])
+## generateNKeysBetween(a, b, n, [digits])
+Re-export of `fractional-indexing`'s `generateNKeysBetween`
+
 **Kind**: global function  
 
 | Param | Type |
