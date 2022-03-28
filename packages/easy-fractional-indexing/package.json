@@ -1,9 +1,9 @@
 {
   "name": "easy-fractional-indexing",
   "version": "1.0.0",
-  "main": "dist/index.js",
   "author": "SilentEcho",
-  "license": "MIT",
+  "license": "CC0-1.0",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "jest",
