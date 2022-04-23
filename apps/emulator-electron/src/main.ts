@@ -1,14 +1,12 @@
 import { fork } from "child_process";
 import { config } from "dotenv";
 import { app, BrowserWindow } from "electron";
-import fs from "fs-extra";
 import { join } from "path";
 import { URL } from "url";
 import { getLogger } from "./lib/logger";
 import { startSocketIOListening } from "./lib/socket";
 config();
 
-const pkg = fs.readJSONSync("./package.json");
 const log = getLogger({ filepath: "electron/main.ts" });
 
 const dev = process.env.NODE_ENV === "development";
@@ -47,7 +45,7 @@ const createWindow = () => {
     icon: iconPath,
     autoHideMenuBar: true,
     roundedCorners: true,
-    title: `SOS Emulator - ${pkg.version}`,
+    title: `SOS Emulator - ${app.getVersion()}`,
   });
 
   const url = new URL(
