@@ -9,7 +9,11 @@
       "dependsOn": ["^build"]
     },
     "dist": {
-      "dependsOn": ["sos-emulator-svelte#build", "^build"]
+      "dependsOn": [
+        "sos-emulator-svelte#build",
+        "sos-emulator-electron#build",
+        "^build"
+      ]
     },
     "dev": {
       "cache": false

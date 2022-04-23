@@ -5,8 +5,7 @@
   "main": "build/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "run-s -l build:electron",
-    "build:electron": "tsc",
+    "build": "tsc",
     "dist": "electron-builder",
     "start": "run-s build && run-p -l start:svelte start:electron",
     "start:electron": "electron .",
