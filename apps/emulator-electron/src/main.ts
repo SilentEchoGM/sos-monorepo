@@ -1,13 +1,20 @@
-import { app, BrowserWindow } from "electron";
-import { getLogger } from "./lib/logger";
-import { join } from "path";
 import { fork } from "child_process";
-import { startSocketIOListening } from "./lib/socket";
+import { config } from "dotenv";
+import { app, BrowserWindow } from "electron";
+import fs from "fs-extra";
+import { join } from "path";
 import { URL } from "url";
+import { getLogger } from "./lib/logger";
+import { startSocketIOListening } from "./lib/socket";
+config();
 
+const pkg = fs.readJSONSync("./package.json");
 const log = getLogger({ filepath: "electron/main.ts" });
 
 const dev = process.env.NODE_ENV === "development";
+
+log.info(`dev ${dev ? 1 : 0}`, process.env);
+
 const iconPath = dev
   ? "../emulator-svelte/public/graphics/logo.png"
   : join(__dirname, "..", "svelte", "public", "graphics", "logo.png");
@@ -40,7 +47,7 @@ const createWindow = () => {
     icon: iconPath,
     autoHideMenuBar: true,
     roundedCorners: true,
-    title: "SOS Emulator",
+    title: `SOS Emulator - ${pkg.version}`,
   });
 
   const url = new URL(
@@ -54,7 +61,7 @@ const createWindow = () => {
       setTimeout(() => {
         win.loadURL(url).catch((err) => {
           log.error(
-            "Retried once, looks like the port is blocked or the SvelteKit server is having an issue.",
+            "Retried once, looks like the port is blocked or the Svelte server is having an issue.",
             {
               err,
             }
