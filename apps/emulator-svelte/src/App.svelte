@@ -24,7 +24,7 @@
 
     if (dt > 1000) {
       $state.game.lastTick = Date.now();
-      $state.game.time--;
+      $state.game.time += ($state.game.isOT ? 1: -1);
       sendPacket("game:clock_updated_seconds");
       sendPacket("game:update_state");
     }
