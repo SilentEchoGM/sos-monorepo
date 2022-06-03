@@ -223,7 +223,7 @@ void SOS::GetGameTimeInfo(json& state, ServerWrapper server)
         state["game"]["elapsed"] = gameWrapper->GetGameEventAsReplay().GetReplayTimeElapsed();
     }
 
-    LOGC(std::to_string(OutputTime));
+    //LOGC(std::to_string(OutputTime));
 }
 
 void SOS::GetBallInfo(json& state, ServerWrapper server)

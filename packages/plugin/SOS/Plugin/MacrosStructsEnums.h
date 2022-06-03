@@ -11,7 +11,7 @@ extern std::shared_ptr<CVarManagerWrapper> globalCvarManager;
     #define SOS_VERSION SOS_VERSION_BASE
 #endif
 
-#define SHOULDLOG 0
+#define SHOULDLOG 1
 #if SHOULDLOG
     #define LOGC(x) globalCvarManager->log(x)
 #else

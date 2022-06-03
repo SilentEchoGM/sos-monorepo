@@ -149,7 +149,14 @@ void SOS::HookInitTeams()
 void SOS::SaveMatchGuid()
 {
     ServerWrapper server = SOSUtils::GetCurrentGameState(gameWrapper);
-    const std::string id = server.GetMatchGUID();
+    std::string id;
+
+    if (server.IsNull()) {
+        LOGC("Server was null for some reason");
+    }
+    else {
+        id = server.GetMatchGUID();
+    }     
 
     using sc = std::chrono::system_clock;
     
@@ -223,7 +230,7 @@ void SOS::HookCountdownInit()
     }
 
     //Sometimes the match_guid appears not to update on a new game, adding this as braces to the belt
-    SaveMatchGuid();
+    //SaveMatchGuid();
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
