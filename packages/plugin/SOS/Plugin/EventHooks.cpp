@@ -172,6 +172,7 @@ void SOS::SaveMatchGuid()
         CurrentMatchGuid = id;
     }
 
+    LOGC("MatchID: " + CurrentMatchGuid);
     Clock->UpdateCurrentMatchGuid(CurrentMatchGuid);
 }
 
