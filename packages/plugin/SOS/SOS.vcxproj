@@ -49,7 +49,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>E:\Projects\sos\sos-plugin\sos-plugin-includes;$(IncludePath)</IncludePath>
+    <IncludePath>E:\Projects\sos\sos-plugin\..\plugin-includes;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)..\release\sos-plugin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Nameplates|x64'">
@@ -65,7 +65,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;BAKKESTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)sos-plugin-includes\RenderingTools;$(SolutionDir)sos-plugin-includes\nlohmann-JSON;$(SolutionDir)sos-plugin-includes\asio-1.12.2\include;$(SolutionDir)sos-plugin-includes\websocketpp-0.8.1;$(BakkesModPath)\bakkesmodsdk\include;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\plugin-includes\RenderingTools;$(SolutionDir)..\plugin-includes\nlohmann-JSON;$(SolutionDir)..\plugin-includes\asio-1.12.2\include;$(SolutionDir)..\plugin-includes\websocketpp-0.8.1;$(BakkesModPath)\bakkesmodsdk\include;$(ProjectDir)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile />
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -87,7 +87,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>USE_NAMEPLATES;NDEBUG;BAKKESTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)sos-plugin-includes\RenderingTools;$(SolutionDir)sos-plugin-includes\nlohmann-JSON;$(SolutionDir)sos-plugin-includes\asio-1.12.2\include;$(SolutionDir)sos-plugin-includes\websocketpp-0.8.1;$(BakkesModPath)\bakkesmodsdk\include;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\plugin-includes\RenderingTools;$(SolutionDir)..\plugin-includes\nlohmann-JSON;$(SolutionDir)..\plugin-includes\asio-1.12.2\include;$(SolutionDir)..\plugin-includes\websocketpp-0.8.1;$(BakkesModPath)\bakkesmodsdk\include;$(ProjectDir)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -101,25 +101,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\CanvasExtensions.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingAssistant.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingMath.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Extra\WrapperStructsExtensions.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Chevron.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Circle.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Circle2D.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Cone.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Cube.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Cylinder.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Frustum.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Grid.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Line.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Matrix3.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Plane.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Sphere.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\Triangle.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\Objects\VisualCamera.h" />
-    <ClInclude Include="..\sos-plugin-includes\RenderingTools\RenderingTools.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Extra\CanvasExtensions.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Extra\RenderingAssistant.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Extra\RenderingMath.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Extra\WrapperStructsExtensions.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Chevron.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Circle.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Circle2D.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Cone.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Cube.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Cylinder.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Frustum.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Grid.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Line.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Matrix3.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Plane.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Sphere.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\Triangle.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\Objects\VisualCamera.h" />
+    <ClInclude Include="..\..\plugin-includes\RenderingTools\RenderingTools.h" />
     <ClInclude Include="Classes\BallSpeedManager.h" />
     <ClInclude Include="Classes\ClockManager.h" />
     <ClInclude Include="Classes\NameplatesManager.h" />
@@ -129,24 +129,24 @@
     <ClInclude Include="Plugin\SOSUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\CanvasExtensions.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingAssistant.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\RenderingMath.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Extra\WrapperStructsExtensions.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Chevron.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Circle.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Circle2D.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Cone.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Cube.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Cylinder.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Frustum.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Grid.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Line.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Matrix3.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Plane.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Sphere.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\Triangle.cpp" />
-    <ClCompile Include="..\sos-plugin-includes\RenderingTools\Objects\VisualCamera.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Extra\CanvasExtensions.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Extra\RenderingAssistant.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Extra\RenderingMath.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Extra\WrapperStructsExtensions.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Chevron.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Circle.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Circle2D.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Cone.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Cube.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Cylinder.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Frustum.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Grid.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Line.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Matrix3.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Plane.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Sphere.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\Triangle.cpp" />
+    <ClCompile Include="..\..\plugin-includes\RenderingTools\Objects\VisualCamera.cpp" />
     <ClCompile Include="Classes\BallSpeedManager.cpp" />
     <ClCompile Include="Classes\ClockManager.cpp" />
     <ClCompile Include="Classes\NameplatesManager.cpp" />
