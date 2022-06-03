@@ -65,7 +65,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;BAKKESTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\plugin-includes\RenderingTools;$(SolutionDir)..\plugin-includes\nlohmann-JSON;$(SolutionDir)..\plugin-includes\asio-1.12.2\include;$(SolutionDir)..\plugin-includes\websocketpp-0.8.1;$(BakkesModPath)\bakkesmodsdk\include;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\plugin-includes\RenderingTools;$(SolutionDir)..\plugin-includes\nlohmann-JSON;$(SolutionDir)..\plugin-includes\asio-1.12.2\include;$(SolutionDir)..\plugin-includes\websocketpp-0.8.1;$(BakkesModPath)\bakkesmodsdk\include;$(ProjectDir);$(SolutionDir)..\plugin-includes\date-3.0.1\include\date</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile />
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
