@@ -24,6 +24,7 @@ bool SOSUtils::ShouldRun(std::shared_ptr<GameWrapper> gameWrapper)
     //Allow in replay mode
     if (gameWrapper->IsInReplay())
     {
+        LOGC("gameWrapper->IsInReplay(): (need true) true");
         return true;
     }
 

@@ -133,6 +133,8 @@ void SOS::HookInitTeams()
             if(SOSUtils::ShouldRun(gameWrapper))
             {
                 HookMatchCreated();
+            } else {
+                LOGC("ShouldRun returned false. Not initializing lobby.");
             }
         }, .05f);
         
