@@ -1,4 +1,12 @@
 {
   "i18n-ally.localesPaths": ["release/sos-emulator/0.2.1/win-unpacked/locales"],
-  "cSpell.words": ["syncedstore"]
+  "cSpell.words": ["syncedstore"],
+  "files.associations": {
+    "*.monster": "json",
+    "*.svx": "markdown",
+    "*.json": "jsonc",
+    "memory": "cpp",
+    "condition_variable": "cpp",
+    "*.ipp": "cpp"
+  }
 }
