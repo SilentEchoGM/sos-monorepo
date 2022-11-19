@@ -79,6 +79,11 @@
   $: if ($socket.channel === "recording-started") {
     $state.ui.recordingListenerError = false;
   }
+
+  $: if ($socket.channel === `new-connection`) {
+    console.log("new connection");
+    sendPacket("game:update_state");
+  }
 </script>
 
 <CollapsiblePanel header="Emulator Controls" uiKey="emulatorModeOpen">
