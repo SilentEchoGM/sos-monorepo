@@ -1,8 +1,8 @@
-import { getLogger } from "./logger";
 import { io, Socket } from "socket.io-client";
-import { type Writable, writable } from "svelte/store";
 import type { SOSEmulator } from "sos-emulator-types";
 import { isPacket } from "sos-plugin-types";
+import { writable, type Writable } from "svelte/store";
+import { getLogger } from "./logger";
 
 type SocketIOFrontendToBackendPayloadData<
   T extends keyof SOSEmulator.FrontendToBackendEvents
@@ -40,6 +40,7 @@ const isCorrectParameterType = <
       "get-playback-library",
       "start-recording",
       "stop-recording",
+      "new-connection",
     ].includes(channel)
   )
     return true;
