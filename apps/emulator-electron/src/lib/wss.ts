@@ -26,6 +26,9 @@ export const startWSS = (
       ws.on("message", (data) => {
         log.info("SOS Emulator WS message", data);
       });
+
+      log.info("new-connection, requesting update_state");
+      socketManager.frontend?.emit(`new-connection`);
     });
 
     wss.on("error", (error) => {
