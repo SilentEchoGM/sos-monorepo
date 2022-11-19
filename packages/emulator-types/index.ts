@@ -27,6 +27,7 @@ export namespace SOSEmulator {
     "recording-started": () => void;
     "recording-stopped": () => void;
     "recording-no-server": () => void;
+    "new-connection": () => void;
 
     //for frontend only
     initial: () => void;
