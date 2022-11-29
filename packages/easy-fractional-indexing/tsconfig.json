@@ -7,7 +7,8 @@
     "incremental": true,
     "rootDir": "src",
     "esModuleInterop": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "lib": ["ES2015"]
   },
   "exclude": ["tests"],
   "include": ["src"]

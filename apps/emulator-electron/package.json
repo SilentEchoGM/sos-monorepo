@@ -37,6 +37,7 @@
     "ws": "~8.5.0"
   },
   "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
     "@types/node": "17.0.21",
     "@types/ws": "~8.5.1",
     "electron": "17.1.0",
@@ -58,7 +59,7 @@
       "target": [
         "nsis"
       ],
-      "icon": "../emulator-svelte/graphics/sos-emu.ico"
+      "icon": "../emulator-svelte/public/graphics/sos-emu.ico"
     },
     "directories": {
       "output": "../../release/sos-emulator/${version}"
