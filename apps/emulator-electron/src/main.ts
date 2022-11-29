@@ -1,6 +1,6 @@
 import { fork } from "child_process";
 import { config } from "dotenv";
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu, shell } from "electron";
 import { join } from "path";
 import { URL } from "url";
 import { getLogger } from "./lib/logger";
@@ -43,7 +43,7 @@ const createWindow = () => {
     },
     backgroundColor: "#322214",
     icon: iconPath,
-    autoHideMenuBar: true,
+
     roundedCorners: true,
     title: `SOS Emulator - ${app.getVersion()}`,
   });
@@ -70,6 +70,51 @@ const createWindow = () => {
   });
 
   if (dev) win.webContents.openDevTools();
+
+  // menu creation
+  const template: (Electron.MenuItemConstructorOptions | Electron.MenuItem)[] =
+    [
+      {
+        label: "File",
+        submenu: [
+          {
+            label: "Download SOS",
+            click: () => {
+              shell.openExternal(
+                "https://github.com/SilentEchoGM/sos-monorepo/releases/download/plugin-v1.6.1-beta.1/SOS.dll"
+              );
+            },
+          },
+          {
+            label: "Open Data Folder",
+            click: () => {
+              shell.openPath(join(app.getPath("userData")));
+            },
+          },
+          {
+            role: "quit",
+          },
+        ],
+      },
+      {
+        label: "Edit",
+        submenu: [
+          { role: "undo" },
+          { role: "redo" },
+          { type: "separator" },
+          { role: "cut" },
+          { role: "copy" },
+          { role: "paste" },
+        ],
+      },
+      {
+        label: "Window",
+        submenu: [{ role: "minimize" }],
+      },
+    ];
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
 };
 
 app.whenReady().then(createWindow);
