@@ -1,12 +1,12 @@
-import { pipe } from "fp-ts/function";
 import { record as R } from "fp-ts";
+import { pipe } from "fp-ts/function";
+import { trivial } from "fp-ts/lib/Ord";
 import { get } from "svelte/store";
 import { getLogger } from "./logger";
 import { packetFactory } from "./packetFactory";
+import { socket } from "./socket";
 import { state } from "./state";
 import type { PacketFactory } from "./types";
-import { trivial } from "fp-ts/lib/Ord";
-import { socket } from "./socket";
 
 const log = getLogger({
   filepath: "apps/emulator-svelte/src/components/PacketSender.svelte",

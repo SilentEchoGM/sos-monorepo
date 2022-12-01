@@ -1,9 +1,9 @@
-import { gameId } from "../stores";
 import type { SOS } from "sos-plugin-types";
 import { get } from "svelte/store";
+import { gameId } from "../stores";
+import type { Options } from "../types";
 import { getPlayer } from "./utils/getPlayer";
 import { getTarget } from "./utils/getTarget";
-import type { Options } from "../types";
 
 export const getStatFeedEvent = ({
   statType = "Shot on Goal",
@@ -14,7 +14,11 @@ export const getStatFeedEvent = ({
   ({
     data: {
       main_target: getTarget(mainTarget),
-      secondary_target: secondaryTarget ?? { id: "", name: "", team_num: -1 },
+      secondary_target: getTarget(secondaryTarget) ?? {
+        id: "",
+        name: "",
+        team_num: -1,
+      },
       match_guid,
       type: statType,
     },

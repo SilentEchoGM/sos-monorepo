@@ -1,5 +1,5 @@
-import type { PacketFactory } from "../types";
 import type { SOS } from "sos-plugin-types";
+import type { DemoOptions, Options, PacketFactory } from "../types";
 import { getBallHit } from "./getBallHit";
 import { getGoalScored } from "./getGoalScored";
 import { getMatchEnded } from "./getMatchEnded";
@@ -28,10 +28,15 @@ export const packetFactory: PacketFactory = {
   "game:goal_scored": getGoalScored,
   "game:replay_start": getReplayStartPlain,
   "game:replay_start||data": getReplayStartData,
+  "game:statfeed_event||demo": (options: DemoOptions) =>
+    getStatFeedEvent({
+      ...options,
+      statType: "Demolition",
+    }),
   "game:match_ended": getMatchEnded,
   "sos:version": () =>
     ({
       event: "sos:version",
       data: "SOS_Emulator",
     } as SOS.SOSVersion),
-};
+} as const;

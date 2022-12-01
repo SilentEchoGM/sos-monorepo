@@ -4,6 +4,29 @@
   import { state } from "../state";
   import { Color } from "./color";
   import EditPlayer from "./EditPlayer.svelte";
+
+  import { readonlyArray as RA } from "fp-ts";
+  import { function as f } from "fp-ts";
+  import { array as A } from "fp-ts";
+  import { option as O } from "fp-ts";
+  import { either as E } from "fp-ts";
+  import { map as M } from "fp-ts";
+  import { task as T } from "fp-ts";
+  import { taskEither as TE } from "fp-ts";
+  import { ord as Ord } from "fp-ts";
+  import { eq as Eq } from "fp-ts";
+  import { record as R } from "fp-ts";
+  import { string as Str } from "fp-ts";
+  import { state as S } from "fp-ts";
+  import { set as FSet } from "fp-ts";
+  import { date as FDate } from "fp-ts";
+  import { players } from "../stores";
+  import { random as Rand } from "fp-ts";
+  import { randomElem } from "fp-ts/lib/Random";
+  import { sendPacket } from "../sendPacket";
+  import { packetFactory } from "../packetFactory";
+  import { socket } from "../socket";
+
   export let player: SOS.Player["id"];
 
   let color = $state.players[player].team ? Color.orange : Color.blue;
@@ -52,6 +75,24 @@
       on:click={() => {
         $state.game.target = player;
       }}>Set as Target</button>
+    <button
+      on:click={() => {
+        const pick = f.pipe(
+          $state.players,
+          R.filter((p) => p.team !== $state.players[player].team),
+          R.collect(Ord.trivial)((_k, v) => v),
+          RA.fromArray,
+          Rand.randomElem
+        )();
+
+        const packet = packetFactory["game:statfeed_event||demo"]({
+          mainTarget: $state.players[player],
+          secondaryTarget: pick,
+          match_guid: $state.game.match_guid,
+        });
+
+        socket.set({ channel: "send-packet", data: packet });
+      }}>Demo someone</button>
     <button
       on:click={() => {
         editing = true;

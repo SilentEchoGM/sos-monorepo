@@ -33,5 +33,11 @@ export type Options = {
 
 type PacketFetcher = (options: Options) => SOS.Packet;
 
+export type DemoOptions = Pick<
+  Options,
+  `mainTarget` | "secondaryTarget" | "match_guid"
+>;
 export interface PacketFactory
-  extends Record<SOS.Event | "game:replay_start||data", PacketFetcher> {}
+  extends Record<SOS.Event | "game:replay_start||data", PacketFetcher> {
+  "game:statfeed_event||demo": (options: DemoOptions) => SOS.GameStatFeedEvent;
+}
