@@ -14,11 +14,14 @@ export const getStatFeedEvent = ({
   ({
     data: {
       main_target: getTarget(mainTarget),
-      secondary_target: getTarget(secondaryTarget) ?? {
-        id: "",
-        name: "",
-        team_num: -1,
-      },
+      secondary_target: getTarget(
+        secondaryTarget ??
+          ({
+            id: "",
+            name: "",
+            team: -1,
+          } as unknown as SOS.Player)
+      ),
       match_guid,
       type: statType,
     },
