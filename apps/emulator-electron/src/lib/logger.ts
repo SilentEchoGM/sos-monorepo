@@ -36,7 +36,7 @@ const createLevel =
       return ["\n", obj, "\n"];
     };
 
-    electronLog[level](...formatted, formatObj(obj));
+    electronLog[level](...formatted, ...formatObj(obj));
     // console[level](
     //   ...formatted.map((string, i) => {
     //     const colors = [
