@@ -138,7 +138,6 @@ export const createPlaybackManager = (
         if (
           isSpecificPacket<SOS.GameStatFeedEvent>("game:statfeed_event")(packet)
         ) {
-          log.info(`packet ${state.i} is a statfeed_event`, state);
           return [
             O.some({
               ...packet,
@@ -153,7 +152,6 @@ export const createPlaybackManager = (
         }
 
         if (isSpecificPacket<SOS.GameUpdate>("game:update_state")(packet)) {
-          log.info(`packet ${state.i} is a game:update_state`, state);
           return [
             O.none,
             {
