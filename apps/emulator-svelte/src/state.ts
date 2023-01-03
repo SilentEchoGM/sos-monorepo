@@ -1,10 +1,26 @@
-import syncedStore, { getYjsValue } from "@syncedstore/core";
-import { svelteSyncedStore } from "@syncedstore/svelte";
-import type { SOS } from "sos-plugin-types";
-import { IndexeddbPersistence } from "y-indexeddb";
-import type { Doc } from "yjs";
+import { DatedPacket, SOS, sosEvents } from "sos-plugin-types";
 
-const defaultGameState = {
+import { function as f, readonlyArray as RA } from "fp-ts";
+import { Persistent, persistent } from "./persistentStore";
+
+export type GameState = {
+  match_guid: string;
+  blueName: string;
+  blueScore: number;
+  orangeName: string;
+  orangeScore: number;
+  time: number;
+  arena: string;
+  target: string;
+  statEvent: string;
+  isOT: boolean;
+  isReplay: boolean;
+  statType: SOS.StatFeedEvent;
+  ticking: boolean;
+  lastTick: number;
+};
+
+const defaultGameState: GameState = {
   match_guid: "",
   blueName: "",
   blueScore: 0,
@@ -19,10 +35,6 @@ const defaultGameState = {
   statType: "Shot on Goal",
   ticking: false,
   lastTick: Date.now(),
-};
-
-export type GameState = Omit<typeof defaultGameState, "statType"> & {
-  statType: SOS.StatFeedEvent;
 };
 
 export type UIState = {
@@ -44,6 +56,7 @@ export type EmulatorState = {
   mode: EmulatorMode;
   recording: boolean;
   playing: boolean;
+  recentPackets: Record<SOS.Event, DatedPacket<SOS.Packet>[]>;
 };
 
 export type PlaybackState = {
@@ -52,18 +65,52 @@ export type PlaybackState = {
   gameId: string | null;
   listOfGameIds: string[];
   loaded: boolean;
+  statPackets: DatedPacket<SOS.GameStatFeedEvent>[];
 };
 
-const rawState = syncedStore({
-  emulator: {} as EmulatorState,
-  game: {} as GameState,
-  players: {} as SOS.PlayersStore,
-  ui: {} as UIState,
-  playback: {} as PlaybackState,
+export type AppState = {
+  emulator: EmulatorState;
+  game: GameState;
+  players: SOS.PlayersStore;
+  ui: UIState;
+  playback: PlaybackState;
+};
+
+export const state: Persistent<AppState> = persistent<AppState>("AppState", {
+  emulator: {
+    mode: EmulatorMode.manual,
+    recording: false,
+    playing: false,
+    recentPackets: f.pipe(
+      sosEvents,
+      RA.reduce(
+        {} as Record<SOS.Event, DatedPacket<SOS.Packet>[]>,
+        (acc, event) => ({ ...acc, [event]: [] })
+      )
+    ),
+  },
+  game: defaultGameState,
+  players: {},
+  ui: {
+    gameStateOpen: true,
+    playersOpen: true,
+    emulatorModeOpen: true,
+    wssError: false,
+    recordingListenerError: false,
+    packetWeights: f.pipe(
+      sosEvents,
+      RA.reduce({} as Record<SOS.Event, number>, (acc, event) => ({
+        ...acc,
+        [event]: 0,
+      }))
+    ),
+  },
+  playback: {
+    currentFrame: 0,
+    length: 0,
+    gameId: null,
+    listOfGameIds: [],
+    loaded: false,
+    statPackets: [],
+  },
 });
-
-export const state = svelteSyncedStore(rawState);
-
-const stateDoc = getYjsValue(rawState) as Doc;
-
-const localProvider = new IndexeddbPersistence("state", stateDoc);
