@@ -35,3 +35,5 @@ yarn-error.log*
 win-unpacked
 packages/plugin-includes/*/doc
 packages/plugin-includes/*/docs
+
+/dist/
