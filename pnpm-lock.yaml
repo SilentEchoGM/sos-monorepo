@@ -27,8 +27,8 @@ importers:
       fs-extra: ~10.0.1
       npm-run-all: ~4.1.5
       socket.io: ~4.4.1
-      sos-emulator-types: 1.0.0
-      sos-plugin-types: 1.0.0
+      sos-emulator-types: workspace:*
+      sos-plugin-types: workspace:*
       typescript: ^4.0.0
       ws: ~8.5.0
     dependencies:
@@ -42,7 +42,7 @@ importers:
       fs-extra: 10.0.1
       socket.io: 4.4.1
       sos-emulator-types: link:../../packages/emulator-types
-      sos-plugin-types: 1.0.0
+      sos-plugin-types: link:../../packages/plugin-types
       ws: 8.5.0
     devDependencies:
       '@types/fs-extra': 9.0.13
@@ -70,8 +70,8 @@ importers:
       rollup-plugin-terser: ^7.0.0
       sirv-cli: ^2.0.0
       socket.io-client: ~4.4.1
-      sos-emulator-types: 1.0.0
-      sos-plugin-types: 1.0.0
+      sos-emulator-types: workspace:*
+      sos-plugin-types: workspace:*
       svelte: ^3.0.0
       svelte-check: ^2.0.0
       svelte-fsm: ~1.1.2
@@ -90,7 +90,7 @@ importers:
       sirv-cli: 2.0.2
       socket.io-client: 4.4.1
       sos-emulator-types: link:../../packages/emulator-types
-      sos-plugin-types: 1.0.0
+      sos-plugin-types: link:../../packages/plugin-types
       svelte-fsm: 1.1.2
       svelte-knobby: 0.3.4_svelte@3.46.4
       uuid: 8.3.2
@@ -133,10 +133,10 @@ importers:
 
   packages/emulator-types:
     specifiers:
-      sos-plugin-types: 1.0.0
+      sos-plugin-types: workspace:*
       typescript: ^4.0.0
     dependencies:
-      sos-plugin-types: 1.0.0
+      sos-plugin-types: link:../plugin-types
     devDependencies:
       typescript: 4.6.2
 
@@ -4814,12 +4814,6 @@ packages:
       sander: 0.5.1
       sourcemap-codec: 1.4.8
     dev: true
-
-  /sos-plugin-types/1.0.0:
-    resolution: {integrity: sha512-+AqHG27Q4a5pbciunj2mMBVZsJyRy8clcZqGDQhEypVIw0HLoBpCDkywdmZjwpYcubaEx/8TiSFIF07LCeV6+w==}
-    dependencies:
-      fp-ts: 2.11.9
-    dev: false
 
   /source-map-support/0.5.21:
     resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
