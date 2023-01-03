@@ -36,4 +36,4 @@ win-unpacked
 packages/plugin-includes/*/doc
 packages/plugin-includes/*/docs
 
-/dist/
+**/dist/*
