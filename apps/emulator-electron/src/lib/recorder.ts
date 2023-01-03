@@ -1,21 +1,21 @@
+import { app } from "electron";
+import {
+  array as A,
+  json as J,
+  option as O,
+  task as T,
+  taskEither as TE,
+} from "fp-ts";
+import { pipe } from "fp-ts/function";
+import * as fs from "fs-extra";
+import { join } from "path";
 import {
   DatedPacket,
   isDatedPacket,
   ordDatedPacket,
   SOS,
 } from "sos-plugin-types";
-import * as fs from "fs-extra";
-import { join } from "path";
-import { app } from "electron";
 import { getLogger } from "./logger";
-import { pipe } from "fp-ts/function";
-import {
-  taskEither as TE,
-  task as T,
-  array as A,
-  json as J,
-  option as O,
-} from "fp-ts";
 
 const log = getLogger({ filepath: "emulator-electron/src/lib/recorder.ts" });
 
@@ -63,7 +63,7 @@ export const startRecording = () => {
   };
 };
 
-const parsePackets = (line: string): O.Option<DatedPacket> =>
+const parsePackets = (line: string): O.Option<DatedPacket<SOS.Packet>> =>
   pipe(
     line,
     J.parse,
