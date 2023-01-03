@@ -1,4 +1,4 @@
-import type { SOS } from "sos-plugin-types";
+import type { DatedPacket, SOS } from "sos-plugin-types";
 
 export namespace SOSEmulator {
   export interface FrontendToBackendEvents {
@@ -21,7 +21,10 @@ export namespace SOSEmulator {
     "playback-stopped": () => void;
     "playback-library": (library: string[]) => void;
     "playback-length": (length: number) => void;
-    "playback-loaded": (length: number) => void;
+    "playback-loaded": (data: {
+      length: number;
+      statEvents: DatedPacket<SOS.GameStatFeedEvent>[];
+    }) => void;
     "playback-current-frame": (currentFrame: number) => void;
     "playback-load-error": () => void;
     "recording-started": () => void;
