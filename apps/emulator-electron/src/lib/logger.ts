@@ -60,5 +60,11 @@ export const getLogger = (meta: LogMeta) => {
     info: createLevel("info", meta),
     error: createLevel("error", meta),
     warn: createLevel("warn", meta),
+    trace:
+      (label: string | number) =>
+      <T>(value: T) => {
+        createLevel("info", meta)("TRACE: " + label, value);
+        return value;
+      },
   };
 };
