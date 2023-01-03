@@ -88,15 +88,13 @@
   }
 
   $: if ($socket.channel === "playback-loaded") {
-    log.info("playback-loaded", $socket.data);
+    log.info("playback-loaded", $socket.data.length);
     $state.playback.length = $socket.data.length;
     $state.playback.currentFrame = 0;
     $state.playback.statPackets = $socket.data.statEvents ?? [];
   }
 
   $: if (!dragging) current.set($state.playback.currentFrame);
-
-  $: console.log(JSON.stringify($state.playback.statPackets, null, 2));
 </script>
 
 <WssError />
@@ -139,9 +137,9 @@
       }}>Start Playing</button>
   {/if}
 
-  <span
-    >Frame {$state.playback?.currentFrame ?? 0} of {$state.playback?.length ??
-      0}</span>
+  <div class="frame-number">
+    Frame {$state.playback?.currentFrame ?? 0} of {$state.playback?.length ?? 0}
+  </div>
   <input
     type="range"
     min="0"
@@ -183,6 +181,10 @@
 </div>
 
 <style>
+  .frame-number {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
   .event-list {
     display: grid;
     grid-template-columns: 10em 1em 10em 1fr;

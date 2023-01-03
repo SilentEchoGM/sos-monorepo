@@ -11,10 +11,10 @@
     $state.emulator.recording = false;
 
   onMount(() => {
-    $socket = {
+    socket.set({
       channel: "close-wss",
       data: null,
-    };
+    });
   });
 </script>
 
@@ -24,10 +24,10 @@
   {#if $state.emulator.recording}
     <button
       on:click={() => {
-        $socket = {
+        socket.set({
           channel: "stop-recording",
           data: null,
-        };
+        });
       }}>Stop Recording</button>
   {:else}
     <button
@@ -35,10 +35,10 @@
         ? "var(--maroon)"
         : ""}
       on:click={() => {
-        $socket = {
+        socket.set({
           channel: "start-recording",
           data: null,
-        };
+        });
       }}
       >{$state.ui.recordingListenerError ? "Retry" : "Start Recording"}</button>
   {/if}

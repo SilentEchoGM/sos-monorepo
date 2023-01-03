@@ -49,10 +49,10 @@
         A.reverse
       );
   onMount(() => {
-    $socket = {
+    socket.set({
       channel: "open-wss",
       data: null,
-    };
+    });
   });
 
   let sortAlphabetically = false;
