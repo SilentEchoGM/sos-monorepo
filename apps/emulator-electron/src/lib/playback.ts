@@ -1,21 +1,24 @@
-import { pipe, identity } from "fp-ts/function";
 import {
-  set as S,
   array as A,
   either as E,
-  ord as Ord,
+  function as f,
   option as O,
+  ord as Ord,
+  readonlyArray as RA,
+  set as FSet,
+  state as S,
   taskEither as TE,
 } from "fp-ts";
-import { getLogger } from "./logger";
-import { loadGame } from "./recorder";
-import { socketManager } from "./socketManager";
-import type { WebSocket } from "ws";
+import { identity, pipe } from "fp-ts/function";
 import { stringify } from "fp-ts/lib/Json";
 import { Socket } from "socket.io";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import { SOSEmulator } from "sos-emulator-types";
-import { DatedPacket } from "sos-plugin-types";
+import { DatedPacket, isSpecificPacket, SOS } from "sos-plugin-types";
+import type { WebSocket } from "ws";
+import { getLogger } from "./logger";
+import { loadGame } from "./recorder";
+import { socketManager } from "./socketManager";
 const log = getLogger({ filepath: "emulator-electron/src/lib/playback.ts" });
 
 type PlaybackManager = {
@@ -24,7 +27,7 @@ type PlaybackManager = {
   loaded: boolean;
   timeout: O.Option<NodeJS.Timeout>;
   playing: boolean;
-  packets: DatedPacket[];
+  packets: DatedPacket<SOS.Packet>[];
 };
 
 const optionClearTimeout = (timeout: O.Option<NodeJS.Timeout>) =>
@@ -60,7 +63,7 @@ export const createPlaybackManager = (
 
     pipe(
       socketManager.wss.clients,
-      S.toArray(Ord.trivial as Ord.Ord<WebSocket>),
+      FSet.toArray(Ord.trivial as Ord.Ord<WebSocket>),
       A.map((client) => {
         const { date, ...packet } = manager.packets[manager.currentFrame];
         const json = pipe(
@@ -125,7 +128,59 @@ export const createPlaybackManager = (
       return;
     }
 
-    socket.emit("playback-loaded", packets.length);
+    type State = { gameTime: number; i: number };
+
+    const mapPacket =
+      (
+        packet: DatedPacket<SOS.Packet>
+      ): S.State<State, O.Option<DatedPacket<SOS.GameStatFeedEvent>>> =>
+      (state) => {
+        if (
+          isSpecificPacket<SOS.GameStatFeedEvent>("game:statfeed_event")(packet)
+        ) {
+          log.info(`packet ${state.i} is a statfeed_event`, state);
+          return [
+            O.some({
+              ...packet,
+              gameTime: state.gameTime,
+              i: state.i + 1,
+            }),
+            {
+              ...state,
+              i: state.i + 1,
+            },
+          ];
+        }
+
+        if (isSpecificPacket<SOS.GameUpdate>("game:update_state")(packet)) {
+          log.info(`packet ${state.i} is a game:update_state`, state);
+          return [
+            O.none,
+            {
+              gameTime: packet.data.game.time_seconds,
+              i: state.i + 1,
+            },
+          ];
+        }
+
+        return [
+          O.none,
+          {
+            ...state,
+            i: state.i + 1,
+          },
+        ];
+      };
+
+    const statEvents = f.pipe(
+      packets,
+      S.traverseArray(mapPacket),
+      S.evaluate<State>({ gameTime: 0, i: 0 }),
+      RA.compact,
+      RA.toArray
+    );
+
+    socket.emit("playback-loaded", { statEvents, length: packets.length });
     manager.gameId = O.some(gameId);
     manager.packets = packets;
     manager.currentFrame = 0;
