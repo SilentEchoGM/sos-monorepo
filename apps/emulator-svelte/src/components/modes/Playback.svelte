@@ -1,24 +1,46 @@
 <script lang="ts">
+  import { readonlyArray as RA } from "fp-ts";
+  import { function as f } from "fp-ts";
+  import { array as A } from "fp-ts";
+  import { option as O } from "fp-ts";
+  import { either as E } from "fp-ts";
+  import { map as M } from "fp-ts";
+  import { task as T } from "fp-ts";
+  import { taskEither as TE } from "fp-ts";
+  import { ord as Ord } from "fp-ts";
+  import { eq as Eq } from "fp-ts";
+  import { record as R } from "fp-ts";
+  import { string as Str } from "fp-ts";
+  import { state as S } from "fp-ts";
+  import { set as FSet } from "fp-ts";
+  import { date as FDate } from "fp-ts";
+
   import { onDestroy, onMount, tick } from "svelte";
   import { socket } from "../../socket";
   import { state } from "../../state";
   import WssError from "../errors/Wss.svelte";
   import SelectInput from "../inputs/SelectInput.svelte";
-  import { writable } from "svelte/store";
-  import { gameId, stat } from "../../stores";
+  import { derived, Readable, writable } from "svelte/store";
+  import { getLogger } from "../../logger";
+  import type { DatedPacket, SOS } from "sos-plugin-types";
+  import { playback } from "../../stores";
+
+  const log = getLogger({
+    filepath: import.meta.url,
+  });
 
   onMount(async () => {
-    $socket = {
+    socket.set({
       channel: "get-playback-library",
       data: null,
-    };
+    });
 
     await tick();
 
-    $socket = {
+    socket.set({
       channel: "open-wss",
       data: null,
-    };
+    });
 
     $state.playback.loaded = false;
 
@@ -27,18 +49,18 @@
       $state.playback.gameId = "No games found!";
     }
     await tick();
-    $socket = {
+    socket.set({
       channel: "load-playback",
       data: $state.playback.gameId,
-    };
+    });
   });
 
   onDestroy(() => {
     $state.emulator.playing = false;
-    $socket = {
+    socket.set({
       channel: "stop-playback",
       data: null,
-    };
+    });
   });
 
   let dragging = false;
@@ -66,11 +88,15 @@
   }
 
   $: if ($socket.channel === "playback-loaded") {
-    $state.playback.length = $socket.data;
+    log.info("playback-loaded", $socket.data);
+    $state.playback.length = $socket.data.length;
     $state.playback.currentFrame = 0;
+    $state.playback.statPackets = $socket.data.statEvents ?? [];
   }
 
   $: if (!dragging) current.set($state.playback.currentFrame);
+
+  $: console.log(JSON.stringify($state.playback.statPackets, null, 2));
 </script>
 
 <WssError />
@@ -78,10 +104,10 @@
   <SelectInput
     bind:value={$state.playback.gameId}
     on:change={() => {
-      $socket = {
+      socket.set({
         channel: "load-playback",
         data: $state.playback.gameId,
-      };
+      });
     }}
     label="Selected Game"
     options={$state.playback.listOfGameIds}
@@ -89,27 +115,27 @@
   {#if $state.emulator.playing}
     <button
       on:click={() => {
-        $socket = {
+        socket.set({
           channel: "stop-playback",
           data: null,
-        };
+        });
       }}>Stop Playing</button>
   {:else}
     <button
       on:click={async () => {
         if (!$state.playback.loaded) {
-          $socket = {
+          socket.set({
             channel: "load-playback",
             data: $state.playback.gameId,
-          };
+          });
           await tick();
         }
         $state.game.ticking = false;
 
-        $socket = {
+        socket.set({
           channel: "start-playback",
           data: null,
-        };
+        });
       }}>Start Playing</button>
   {/if}
 
@@ -126,14 +152,42 @@
     }}
     on:mouseup={() => {
       dragging = false;
-      $socket = {
+      socket.set({
         channel: "set-playback-current-frame",
         data: $current,
-      };
+      });
     }} />
+</div>
+<div>
+  <h3>Events</h3>
+
+  <div class="event-list">
+    {#each $state.playback.statPackets ?? [] as statEvent}
+      <div
+        class="stat-time"
+        on:click={() => {
+          socket.set({
+            channel: "set-playback-current-frame",
+            data: statEvent.i - 1,
+          });
+        }}>
+        {statEvent.gameTime ?? 0} - {statEvent.i}
+      </div>
+      <div class="stat-team">
+        {statEvent.data.main_target.team_num ? "O" : "B"}
+      </div>
+      <div class="stat-type">{statEvent.data.type}</div>
+      <div class="stat-player">{statEvent.data.main_target.name}</div>
+    {/each}
+  </div>
 </div>
 
 <style>
+  .event-list {
+    display: grid;
+    grid-template-columns: 10em 1em 10em 1fr;
+    grid-gap: 0.5em;
+  }
   .grid {
     padding-top: 1em;
     grid-template-columns: 10em 25em 10em;
