@@ -39,4 +39,4 @@ export const packetFactory: PacketFactory = {
       event: "sos:version",
       data: "SOS_Emulator",
     } as SOS.SOSVersion),
-} as const;
+};
