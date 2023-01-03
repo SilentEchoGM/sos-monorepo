@@ -17,7 +17,9 @@
     "url": "https://github.com/SilentEchoUK/sos-packages/issues"
   },
   "homepage": "https://github.com/SilentEchoUK/sos-packages#readme",
-  "dependencies": {"sos-plugin-types":"1.0.0"},
+  "dependencies": {
+    "sos-plugin-types": "workspace:*"
+  },
   "devDependencies": {
     "typescript": "^4.0.0"
   }

@@ -32,8 +32,8 @@
     "fp-ts": "^2.11.8",
     "fs-extra": "~10.0.1",
     "socket.io": "~4.4.1",
-    "sos-emulator-types": "1.0.0",
-    "sos-plugin-types": "1.0.0",
+    "sos-emulator-types": "workspace:*",
+    "sos-plugin-types": "workspace:*",
     "ws": "~8.5.0"
   },
   "devDependencies": {
@@ -46,7 +46,7 @@
     "typescript": "^4.0.0"
   },
   "peerDependencies": {
-    "sos-emulator-svelte": "*"
+    "sos-emulator-svelte": "workspace:*"
   },
   "build": {
     "productName": "SOS Emulator",
