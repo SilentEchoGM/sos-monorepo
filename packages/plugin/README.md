@@ -2,7 +2,7 @@
 
 - standardised "teamnum" to "team_num" in "goal_scored" event
 - handles LAN matches
-- standardised "teamnum" to "team_num" in "goal_scored" event
+- fixed multi-platform player ids
 - added "isBoosting" prop to player objects
 
 # SOS Overlay System - Original Readme
