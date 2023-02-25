@@ -1,4 +1,11 @@
-# SOS Overlay System
+## Changes from https://gitlab.com/bakkesplugins/sos/sos-plugin/-/tree/master/
+
+- standardised "teamnum" to "team_num" in "goal_scored" event
+- handles LAN matches
+- standardised "teamnum" to "team_num" in "goal_scored" event
+- added "isBoosting" prop to player objects
+
+# SOS Overlay System - Original Readme
 SOS-Plugin aims to provide an easy to use event relay in use for Esports broadcasts, particularily in the Tournament sector. Personal streams are able to use this, but it is not officially supported at this moment.
 
 Want some real life examples? Check out the `Codename: COVERT` assets:
