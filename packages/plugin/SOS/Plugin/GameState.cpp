@@ -249,6 +249,12 @@ void SOS::GetBallInfo(json& state, ServerWrapper server)
 	state["game"]["ball"]["location"]["X"] = ballLocation.X;
 	state["game"]["ball"]["location"]["Y"] = ballLocation.Y;
 	state["game"]["ball"]["location"]["Z"] = ballLocation.Z;
+
+    //Get Ball Rotation
+    Rotator ballRotation = ball.GetRotation();
+    state["game"]["ball"]["location"]["Roll"] = ballRotation.Roll;
+    state["game"]["ball"]["location"]["Pitch"] = ballRotation.Pitch;
+    state["game"]["ball"]["location"]["Yaw"] = ballRotation.Yaw;
 }
 
 void SOS::GetWinnerInfo(json& state, ServerWrapper server)
