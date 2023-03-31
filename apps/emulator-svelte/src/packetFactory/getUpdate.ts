@@ -1,9 +1,10 @@
-import { gameId } from "../stores";
 import type { SOS } from "sos-plugin-types";
 import { get } from "svelte/store";
-import { getLocation } from "./utils/getLocation";
-import { getPlayerStore } from "./utils/getPlayerStore";
+import { gameId } from "../stores";
 import type { Options } from "../types";
+import { getLocation } from "./utils/getLocation";
+import { getLocationAndRotation } from "./utils/getLocationAndRotation";
+import { getPlayerStore } from "./utils/getPlayerStore";
 
 export const getUpdate = ({
   players = getPlayerStore(),
@@ -24,7 +25,7 @@ export const getUpdate = ({
     game: {
       arena,
       ball: {
-        location: getLocation(),
+        location: getLocationAndRotation(),
         speed: 0,
         team: 255,
       },
