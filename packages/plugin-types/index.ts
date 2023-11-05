@@ -120,7 +120,7 @@ export namespace SOS {
   export interface Target {
     id: string;
     name: string;
-    team_num: TeamEnum | -1;
+    teamnum: TeamEnum | -1;
   }
 
   export interface GoalScoredData {
