@@ -11,16 +11,16 @@ void SOS::HookAllEvents()
 {
     using namespace std::placeholders;
 
-    //UPDATE GAME STATE EVERY TICK
+    // UPDATE GAME STATE EVERY TICK
     gameWrapper->RegisterDrawable(std::bind(&SOS::HookViewportTick, this, _1));
 
-    //CLOCK EVENTS
+    // CLOCK EVENTS
     gameWrapper->HookEvent("Function TAGame.GameEvent_Soccar_TA.OnGameTimeUpdated", std::bind(&SOS::HookOnTimeUpdated, this));
     gameWrapper->HookEvent("Function TAGame.GameEvent_Soccar_TA.OnOvertimeUpdated", std::bind(&SOS::HookOnOvertimeStarted, this));
     gameWrapper->HookEvent("Function Engine.WorldInfo.EventPauseChanged", std::bind(&SOS::HookOnPauseChanged, this));
     gameWrapper->HookEventWithCaller<CarWrapper>("Function TAGame.Car_TA.EventHitBall", std::bind(&SOS::HookCarBallHit, this, _1, _2));
 
-    //GAME EVENTS
+    // GAME EVENTS
     gameWrapper->HookEventPost("Function TAGame.Team_TA.PostBeginPlay", std::bind(&SOS::HookInitTeams, this));
     gameWrapper->HookEvent("Function TAGame.GameInfo_Replay_TA.InitGame", std::bind(&SOS::HookReplayCreated, this));
     gameWrapper->HookEventPost("Function TAGame.GameEvent_Soccar_TA.Destroyed", std::bind(&SOS::HookMatchDestroyed, this));
@@ -36,85 +36,100 @@ void SOS::HookAllEvents()
     gameWrapper->HookEventWithCallerPost<ActorWrapper>("Function TAGame.ReplayDirector_TA.OnScoreDataChanged", std::bind(&SOS::HookReplayScoreDataChanged, this, _1));
 }
 
-
 // GAME STATE //
 void SOS::HookViewportTick(CanvasWrapper canvas)
 {
-    if(!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper)) { return; }
+    if (!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper))
+    {
+        return;
+    }
 
     UpdateGameState(canvas);
     DebugRender(canvas);
 }
 
-
 // CLOCK EVENTS //
 void SOS::HookOnTimeUpdated()
 {
-    if(!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper)) { return; }
+    if (!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper))
+    {
+        return;
+    }
 
-    //Limit clock updating to only happen within the bounds of normal gameplay
-    if(!matchCreated || bInGoalReplay || bInPreReplayLimbo || gameWrapper->IsPaused()) { return; }
+    // Limit clock updating to only happen within the bounds of normal gameplay
+    if (!matchCreated || bInGoalReplay || bInPreReplayLimbo || gameWrapper->IsPaused())
+    {
+        return;
+    }
 
-    //Unpauses the clock if it's paused and updates its time
+    // Unpauses the clock if it's paused and updates its time
     Clock->OnClockUpdated();
 }
 
 void SOS::HookOnOvertimeStarted()
 {
-    if(!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper)) { return; }
-    
+    if (!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper))
+    {
+        return;
+    }
+
     Clock->OnOvertimeStarted();
 }
 
 void SOS::HookOnPauseChanged()
 {
-    if(!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper)) { return; }
+    if (!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper))
+    {
+        return;
+    }
 
-    if(gameWrapper->IsPaused())
+    if (gameWrapper->IsPaused())
     {
         Clock->StopClock();
     }
     else
     {
-        if(bPendingRestartFromKickoff)
+        if (bPendingRestartFromKickoff)
         {
-            //Admin uses "restart from kickoff"
-            //Don't start clock now. Let HookRoundStart do that
+            // Admin uses "restart from kickoff"
+            // Don't start clock now. Let HookRoundStart do that
             bPendingRestartFromKickoff = false;
         }
         else
         {
-            //Admin doesn't use "restart from kickoff"
-            //PauseChanged automatically fires after the 3 second unpause countdown, no extra delay needed
+            // Admin doesn't use "restart from kickoff"
+            // PauseChanged automatically fires after the 3 second unpause countdown, no extra delay needed
             Clock->StartClock(false);
         }
     }
 }
 
-void SOS::HookCarBallHit(CarWrapper car, void* params)
+void SOS::HookCarBallHit(CarWrapper car, void *params)
 {
     GetLastTouchInfo(car, params);
 
-    if(!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper)) { return; }
+    if (!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper))
+    {
+        return;
+    }
 
     SetBallHit(true);
 }
 
 void SOS::SetBallHit(bool bHit)
 {
-    //Sets bBallHasBeenHit to true and starts clock if it needs to be started (i.e. kickoff)
-    //Only run this part if the ball has not been hit yet
-    if(bHit && !bBallHasBeenHit)
+    // Sets bBallHasBeenHit to true and starts clock if it needs to be started (i.e. kickoff)
+    // Only run this part if the ball has not been hit yet
+    if (bHit && !bBallHasBeenHit)
     {
-        if(!Clock->IsClockRunning() && !bInGoalReplay)
+        if (!Clock->IsClockRunning() && !bInGoalReplay)
         {
             Clock->StartClock(true);
         }
     }
-    
+
     bBallHasBeenHit = bHit;
 }
-
 
 // GAME EVENTS //
 void SOS::HookInitTeams()
@@ -125,57 +140,93 @@ void SOS::HookInitTeams()
     // Only initialize lobby on the second hook once both teams are ready
 
     ++NumTimesCalled;
-    if(NumTimesCalled >= 2)
+    if (NumTimesCalled >= 2)
     {
-        //Set a delay so that everything can be filled in before trying to initialize
-        gameWrapper->SetTimeout([this](GameWrapper* gw)
-        {
+        // Set a delay so that everything can be filled in before trying to initialize
+        gameWrapper->SetTimeout([this](GameWrapper *gw)
+                                {
             if(SOSUtils::ShouldRun(gameWrapper))
             {
                 HookMatchCreated();
             } else {
                 LOGC("ShouldRun returned false. Not initializing lobby.");
-            }
-        }, .05f);
-        
+            } },
+                                .05f);
+
         NumTimesCalled = 0;
     }
 
-    //Reset call counter after 2 seconds in case it never got through the >= 2 check
-    if(NumTimesCalled != 0)
+    // Reset call counter after 2 seconds in case it never got through the >= 2 check
+    if (NumTimesCalled != 0)
     {
-        gameWrapper->SetTimeout([this](GameWrapper* gw){ NumTimesCalled = 0; }, 2.f);
+        gameWrapper->SetTimeout([this](GameWrapper *gw)
+                                { NumTimesCalled = 0; },
+                                2.f);
     }
+}
+
+std::string SOS::GetNowString()
+{
+    using sc = std::chrono::system_clock;
+
+    std::time_t t = sc::to_time_t(sc::now());
+    char buf[20];
+    tm localTime;
+    localtime_s(&localTime, &t);
+    strftime(buf, 20, "%Y%m%d%H%M%S", &localTime);
+
+    return std::string(buf);
 }
 
 void SOS::SaveMatchGuid()
 {
+
+    if (SilentMatchGuid.substr(0, 7) != "pending" && !SilentMatchGuid.empty())
+    {
+        std::string msg = "MatchID " + SilentMatchGuid + " already exists, not overwriting";
+        LOGC(msg);
+        return;
+    }
+
     ServerWrapper server = SOSUtils::GetCurrentGameState(gameWrapper);
     std::string id;
 
-    if (server.IsNull()) {
+    if (server.IsNull())
+    {
         LOGC("Server was null for some reason");
     }
-    else {
+    else
+    {
         id = server.GetMatchGUID();
-    }     
-
-    using sc = std::chrono::system_clock;
-    
-    if (id.empty()) {
-        std::time_t t = sc::to_time_t(sc::now());
-        char buf[20];
-        tm localTime;
-        localtime_s(&localTime, &t);
-        strftime(buf, 20, "%Y%m%d%H%M%S", &localTime);
-        CurrentMatchGuid = "LAN" + std::string(buf);
     }
-    else {
+
+   
+
+    if (id.empty())
+    {
+
+        CurrentMatchGuid = "LAN" + GetNowString();
+        SilentMatchGuid = "LAN" + GetNowString();
+    }
+    else
+    {
+
         CurrentMatchGuid = id;
+        SilentMatchGuid = "PVT" + GetNowString();
     }
 
     LOGC("MatchID: " + CurrentMatchGuid);
-    Clock->UpdateCurrentMatchGuid(CurrentMatchGuid);
+    LOGC("SilentMatchID: " + SilentMatchGuid);
+
+    Clock->UpdateCurrentMatchGuid(SilentMatchGuid);
+}
+
+void SOS::RemoveMatchGuid()
+{
+    LOGC("Removing MatchID: " + CurrentMatchGuid);
+    CurrentMatchGuid = "pending" + GetNowString();
+    SilentMatchGuid = "pending" + GetNowString();
+    Clock->UpdateCurrentMatchGuid(SilentMatchGuid);
 }
 
 void SOS::HookMatchCreated()
@@ -192,6 +243,7 @@ void SOS::HookMatchCreated()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
+    event["silent_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:match_created", event);
 }
 
@@ -204,6 +256,7 @@ void SOS::HookReplayCreated()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
+    event["silent_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:replay_created", event);
 }
 
@@ -220,23 +273,25 @@ void SOS::HookMatchDestroyed()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
+    event["silent_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:match_destroyed", event);
 }
 
 void SOS::HookCountdownInit()
 {
-    //When match admin resets from kickoff, the new countdown starts but it starts paused
-    //It will continue when admin unpauses
-    if(gameWrapper->IsPaused())
+    // When match admin resets from kickoff, the new countdown starts but it starts paused
+    // It will continue when admin unpauses
+    if (gameWrapper->IsPaused())
     {
         bPendingRestartFromKickoff = true;
     }
 
-    //Sometimes the match_guid appears not to update on a new game, adding this as braces to the belt
-    //SaveMatchGuid();
+    // Sometimes the match_guid appears not to update on a new game, adding this as braces to the belt
+    SaveMatchGuid();
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
+    event["silent_guid"] = SilentMatchGuid;
 
     if (!firstCountdownHit && SOSUtils::ShouldRun(gameWrapper))
     {
@@ -253,17 +308,21 @@ void SOS::HookRoundStarted()
     bPendingRestartFromKickoff = false;
     bInGoalReplay = false;
 
-    if(!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper)) { return; }
-    
-    //Mark the ball as unhit for the kickoff
+    if (!*cvarEnabled || !SOSUtils::ShouldRun(gameWrapper))
+    {
+        return;
+    }
+
+    // Mark the ball as unhit for the kickoff
     SetBallHit(false);
 
-    //Set the delay for the timer to start if the ball hasn't been hit yet
-    //Default delay in game is 5 seconds
+    // Set the delay for the timer to start if the ball hasn't been hit yet
+    // Default delay in game is 5 seconds
     gameWrapper->SetTimeout(std::bind(&SOS::SetBallHit, this, true), 5.f);
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
+    event["silent_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:round_started_go", "game_round_started_go");
 }
 
@@ -272,15 +331,19 @@ void SOS::HookBallExplode()
     BallSpeed->LockBallSpeed();
     Clock->StopClock();
 
-    if (!*cvarEnabled || !matchCreated) { return; }
-    
-    //Notify that the goal replay will end soon
-    if(bInGoalReplay)
+    if (!*cvarEnabled || !matchCreated)
+    {
+        return;
+    }
+
+    // Notify that the goal replay will end soon
+    if (bInGoalReplay)
     {
         LOGC("Sending ReplayWillEnd Event");
 
         json event;
         event["match_guid"] = CurrentMatchGuid;
+        event["silent_guid"] = SilentMatchGuid;
         Websocket->SendEvent("game:replay_will_end", event);
     }
     else
@@ -289,9 +352,9 @@ void SOS::HookBallExplode()
     }
 }
 
-void SOS::HookOnHitGoal(BallWrapper ball, void* params)
+void SOS::HookOnHitGoal(BallWrapper ball, void *params)
 {
-    //Lock the current ball speed into the cache
+    // Lock the current ball speed into the cache
     BallSpeed->LockBallSpeed();
     Clock->StopClock();
 
@@ -307,6 +370,7 @@ void SOS::HookGoalReplayStart()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
+    event["silent_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:replay_start", event);
 }
 
@@ -316,6 +380,7 @@ void SOS::HookGoalReplayEnd()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
+    event["silent_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:replay_end", event);
 }
 
@@ -331,6 +396,8 @@ void SOS::HookMatchEnded()
 
     json winnerData;
     winnerData["match_guid"] = CurrentMatchGuid;
+    winnerData["silent_guid"] = SilentMatchGuid;
+
     winnerData["winner_team_num"] = NULL;
 
     ServerWrapper server = SOSUtils::GetCurrentGameState(gameWrapper);
@@ -344,16 +411,19 @@ void SOS::HookMatchEnded()
     }
 
     Websocket->SendEvent("game:match_ended", winnerData);
+
+    RemoveMatchGuid();
 }
 
 void SOS::HookPodiumStart()
 {
     json event;
     event["match_guid"] = CurrentMatchGuid;
+    event["silent_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:podium_start", event);
 }
 
-void SOS::HookStatEvent(ServerWrapper caller, void* params)
+void SOS::HookStatEvent(ServerWrapper caller, void *params)
 {
     GetStatEventInfo(caller, params);
 }
@@ -363,8 +433,11 @@ void SOS::HookReplayScoreDataChanged(ActorWrapper caller)
     ReplayDirectorWrapper RDW(caller.memory_address);
     ReplayScoreData ScoreData = RDW.GetReplayScoreData();
 
-    //If ScoredBy is null, that likely means this call was just to reset values
-    if(ScoreData.ScoredBy == 0) { return; }
+    // If ScoredBy is null, that likely means this call was just to reset values
+    if (ScoreData.ScoredBy == 0)
+    {
+        return;
+    }
 
     PriWrapper ScoredBy(ScoreData.ScoredBy);
     std::string ScorerName, ScorerID;

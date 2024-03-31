@@ -25,6 +25,7 @@ private:
     ClockManager() = delete; // No default constructor
 
     std::string CurrentMatchGuid;
+    std::string SilentMatchGuid;
 
     std::shared_ptr<GameWrapper> gameWrapper;
     std::shared_ptr<WebsocketManager> Websocket;

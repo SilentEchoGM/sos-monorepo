@@ -83,6 +83,7 @@ export namespace SOS {
 
   export interface MatchGUIDData {
     match_guid: string;
+    silent_guid: string;
   }
 
   export interface GameMisc {
@@ -146,6 +147,8 @@ export namespace SOS {
   export interface GameStatFeedEventData {
     main_target: Target;
     match_guid: string;
+    silent_guid: string;
+
     secondary_target: Target;
     type: StatFeedEvent;
   }
@@ -158,6 +161,8 @@ export namespace SOS {
   export interface GameBallHitData {
     ball: GameBallHitBallData;
     match_guid: string;
+    silent_guid: string;
+
     player: BasicPlayer;
   }
 
@@ -233,6 +238,7 @@ export namespace SOS {
     game: Game;
     hasGame: boolean;
     match_guid: string;
+    silent_guid: string;
     players: PlayersStore;
   }
 
@@ -260,7 +266,7 @@ export namespace SOS {
   export type GameState = typeof gameStates[number];
 }
 
-export type DatedPacket<T extends SOS.Packet> = T & {
+export type DatedPacket<T extends SOS.Packet = SOS.Packet> = T & {
   i?: number;
   gameTime?: number;
   date: Date;

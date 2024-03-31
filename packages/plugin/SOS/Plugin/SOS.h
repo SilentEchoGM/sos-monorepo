@@ -1,5 +1,5 @@
 #pragma once
-#pragma comment( lib, "PluginSDK.lib" )
+#pragma comment(lib, "PluginSDK.lib")
 
 #include "Classes/WebsocketManager.h"
 #include "Classes/NameplatesManager.h"
@@ -20,12 +20,13 @@ public:
 
 private:
     std::string CurrentMatchGuid;
+    std::string SilentMatchGuid;
 
     // CVARS
-    std::shared_ptr<bool>  cvarEnabled;
-    std::shared_ptr<int>   cvarPort;
+    std::shared_ptr<bool> cvarEnabled;
+    std::shared_ptr<int> cvarPort;
     std::shared_ptr<float> cvarUpdateRate;
-    std::shared_ptr<bool>  bEnableDebugRendering;
+    std::shared_ptr<bool> bEnableDebugRendering;
 
     // MANAGERS
     std::shared_ptr<WebsocketManager> Websocket;
@@ -44,21 +45,23 @@ private:
 
     // GOAL SCORED VARIABLES
     LastTouchInfo lastTouch;
-    Vector2F GoalImpactLocation = {0,0}; // top-left (0,0) bottom right (1,1)
-	void GetGameStateInfo(CanvasWrapper canvas, json& state);
-    Vector2F GetGoalImpactLocation(BallWrapper ball, void* params);
+    Vector2F GoalImpactLocation = {0, 0}; // top-left (0,0) bottom right (1,1)
+    void GetGameStateInfo(CanvasWrapper canvas, json &state);
+    Vector2F GetGoalImpactLocation(BallWrapper ball, void *params);
 
     // MAIN FUNCTION (GameState.cpp)
     void UpdateGameState(CanvasWrapper canvas);
-    //void GetGameStateInfo(CanvasWrapper canvas, json& state);
+    // void GetGameStateInfo(CanvasWrapper canvas, json& state);
 
     // HOOKS (EventHooks.cpp)
     void HookAllEvents();
     void HookViewportTick(CanvasWrapper canvas);
     void HookBallExplode();
-    void HookOnHitGoal(BallWrapper ball, void* params);
+    void HookOnHitGoal(BallWrapper ball, void *params);
     void HookInitTeams();
+    std::string GetNowString();
     void SaveMatchGuid();
+    void RemoveMatchGuid();
     void HookMatchCreated();
     void HookMatchDestroyed();
     void HookMatchEnded();
@@ -68,29 +71,29 @@ private:
     void HookReplayCreated();
     void HookGoalReplayStart();
     void HookGoalReplayEnd();
-    void HookStatEvent(ServerWrapper caller, void* params);
+    void HookStatEvent(ServerWrapper caller, void *params);
     void HookReplayScoreDataChanged(ActorWrapper caller);
 
     // TIME HOOKS
     void HookOnTimeUpdated();
     void HookOnOvertimeStarted(); // Is this not needed?
     void HookOnPauseChanged();
-    void HookCarBallHit(CarWrapper car, void* params);
+    void HookCarBallHit(CarWrapper car, void *params);
     void SetBallHit(bool bHit);
 
     // DATA GATHERING FUNCTIONS (GameState.cpp)
-    void GetPlayerInfo(json& state, ServerWrapper server);
-    void GetIndividualPlayerInfo(json& state, PriWrapper pri);
-    void GetTeamInfo(json& state, ServerWrapper server);
-    void GetGameTimeInfo(json& state, ServerWrapper server);
-    void GetBallInfo(json& state, ServerWrapper server);
+    void GetPlayerInfo(json &state, ServerWrapper server);
+    void GetIndividualPlayerInfo(json &state, PriWrapper pri);
+    void GetTeamInfo(json &state, ServerWrapper server);
+    void GetGameTimeInfo(json &state, ServerWrapper server);
+    void GetBallInfo(json &state, ServerWrapper server);
     void GetCurrentBallSpeed();
-    void GetWinnerInfo(json& state, ServerWrapper server);
-    void GetArenaInfo(json& state);
-    void GetCameraInfo(json& state);
+    void GetWinnerInfo(json &state, ServerWrapper server);
+    void GetArenaInfo(json &state);
+    void GetCameraInfo(json &state);
     void GetNameplateInfo(CanvasWrapper canvas);
-    void GetLastTouchInfo(CarWrapper car, void* params);
-    void GetStatEventInfo(ServerWrapper caller, void* params);
+    void GetLastTouchInfo(CarWrapper car, void *params);
+    void GetStatEventInfo(ServerWrapper caller, void *params);
 
     // DEMO TRACKER
     std::map<std::string, int> DemolitionCountMap{};
@@ -99,5 +102,5 @@ private:
 
     // DEBUGGING HELP
     void DebugRender(CanvasWrapper Canvas);
-    void DrawTextVector(CanvasWrapper Canvas, Vector2 StartPosition, const std::vector<DebugText>& TextVector);
+    void DrawTextVector(CanvasWrapper Canvas, Vector2 StartPosition, const std::vector<DebugText> &TextVector);
 };
