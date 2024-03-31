@@ -178,6 +178,7 @@ export namespace SOS {
     isDead: boolean;
     isPowersliding: boolean;
     isSonic: boolean;
+    isBoosting: boolean;
     location: PlayerLocation;
     name: string;
     onGround: boolean;
