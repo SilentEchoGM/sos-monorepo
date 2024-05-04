@@ -43,6 +43,9 @@ private:
     bool bBallHasBeenHit = false;
     bool bPendingRestartFromKickoff = false;
 
+    // NEW SOS VARIABLES
+    bool bEarlyFinalWhistleBlown = false;
+
     // GOAL SCORED VARIABLES
     LastTouchInfo lastTouch;
     Vector2F GoalImpactLocation = {0, 0}; // top-left (0,0) bottom right (1,1)
@@ -73,6 +76,7 @@ private:
     void HookGoalReplayEnd();
     void HookStatEvent(ServerWrapper caller, void *params);
     void HookReplayScoreDataChanged(ActorWrapper caller);
+    void HookOnFinalWhistle(int winnerTeamNum);
 
     // TIME HOOKS
     void HookOnTimeUpdated();
@@ -94,6 +98,9 @@ private:
     void GetNameplateInfo(CanvasWrapper canvas);
     void GetLastTouchInfo(CarWrapper car, void *params);
     void GetStatEventInfo(ServerWrapper caller, void *params);
+
+    // GUARD FUNCTIONS (EventHooks.cpp)
+    bool CheckForEarlyFinalWhistle();
 
     // DEMO TRACKER
     std::map<std::string, int> DemolitionCountMap{};

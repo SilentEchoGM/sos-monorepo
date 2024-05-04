@@ -200,17 +200,19 @@ void SOS::SaveMatchGuid()
         id = server.GetMatchGUID();
     }
 
-   
+    using sc = std::chrono::system_clock;
 
     if (id.empty())
     {
-
-        CurrentMatchGuid = "LAN" + GetNowString();
-        SilentMatchGuid = "LAN" + GetNowString();
+        std::time_t t = sc::to_time_t(sc::now());
+        char buf[20];
+        tm localTime;
+        localtime_s(&localTime, &t);
+        strftime(buf, 20, "%Y%m%d%H%M%S", &localTime);
+        CurrentMatchGuid = "LAN" + std::string(buf);
     }
     else
     {
-
         CurrentMatchGuid = id;
         SilentMatchGuid = "PVT" + GetNowString();
     }
@@ -265,6 +267,7 @@ void SOS::HookMatchDestroyed()
     bInGoalReplay = false;
     bInPreReplayLimbo = false;
     matchCreated = false;
+    bEarlyFinalWhistleBlown = false;
     firstCountdownHit = false;
     isCurrentlySpectating = false;
     bPendingRestartFromKickoff = false;
@@ -366,7 +369,6 @@ void SOS::HookGoalReplayStart()
     Clock->StopClock();
     bInGoalReplay = true;
     bInPreReplayLimbo = false;
-    Websocket->SendEvent("game:replay_start", "game_replay_start");
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
@@ -413,6 +415,7 @@ void SOS::HookMatchEnded()
     Websocket->SendEvent("game:match_ended", winnerData);
 
     RemoveMatchGuid();
+    HookOnFinalWhistle(winnerData["winner_team_num"]);
 }
 
 void SOS::HookPodiumStart()
@@ -426,6 +429,37 @@ void SOS::HookPodiumStart()
 void SOS::HookStatEvent(ServerWrapper caller, void *params)
 {
     GetStatEventInfo(caller, params);
+}
+
+void SOS::HookOnFinalWhistle(int winnerTeamNum)
+{
+    if (bEarlyFinalWhistleBlown)
+    {
+        return;
+    }
+
+    bEarlyFinalWhistleBlown = true;
+
+    json event;
+    event["match_guid"] = CurrentMatchGuid;
+    event["winner_team_num"] = winnerTeamNum;
+    Websocket->SendEvent("game:final_whistle", event);
+}
+
+bool SOS::CheckForEarlyFinalWhistle()
+{
+    ServerWrapper server = SOSUtils::GetCurrentGameState(gameWrapper);
+    if (server.GetSecondsRemaining() == 0)
+    {
+        return true;
+    }
+
+    if ((bool)server.GetbOverTime())
+    {
+        return true;
+    }
+
+    return false;
 }
 
 void SOS::HookReplayScoreDataChanged(ActorWrapper caller)
@@ -460,4 +494,9 @@ void SOS::HookReplayScoreDataChanged(ActorWrapper caller)
     goalScoreData["ball_last_touch"]["player"] = lastTouch.playerID; // Set in HookCarBallHit
     goalScoreData["ball_last_touch"]["speed"] = lastTouch.speed;     // Set in HookCarBallHit
     Websocket->SendEvent("game:goal_scored", goalScoreData);
+
+    if (CheckForEarlyFinalWhistle())
+    {
+        HookOnFinalWhistle(ScoreData.ScoreTeam);
+    }
 }

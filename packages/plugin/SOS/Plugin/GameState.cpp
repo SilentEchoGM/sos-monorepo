@@ -444,8 +444,8 @@ Vector2F SOS::GetGoalImpactLocation(BallWrapper ball, void *params)
         return {0, 0};
     }
 
-    // Get goal direction and correct rounding errors. Results should either be 0 or +-1
-    Vector GoalDirection = RT::Matrix3(goal.GetGoalOrientation().GetRotation()).forward;
+    //Get goal direction and correct rounding errors. Results should either be 0 or +-1
+    Vector GoalDirection = RT::Matrix3(goal.GetGoalOrientation().GetRotation()).forward;        
     GoalDirection.X = abs(GoalDirection.X) < .5f ? 0.f : GoalDirection.X / abs(GoalDirection.X);
     GoalDirection.Y = abs(GoalDirection.Y) < .5f ? 0.f : GoalDirection.Y / abs(GoalDirection.Y);
     GoalDirection.Z = abs(GoalDirection.Z) < .5f ? 0.f : GoalDirection.Z / abs(GoalDirection.Z);
