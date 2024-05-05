@@ -326,7 +326,7 @@ void SOS::HookRoundStarted()
     json event;
     event["match_guid"] = CurrentMatchGuid;
     event["silent_guid"] = SilentMatchGuid;
-    Websocket->SendEvent("game:round_started_go", "game_round_started_go");
+    Websocket->SendEvent("game:round_started_go", event);
 }
 
 void SOS::HookBallExplode()

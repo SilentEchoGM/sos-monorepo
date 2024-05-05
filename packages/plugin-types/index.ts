@@ -95,8 +95,13 @@ export namespace SOS {
     data: MatchGUIDData & { winner_team_num: 0 | 1 };
     event: "game:match_ended";
   }
+
+  export interface GameFinalWhistle {
+    event: "game:final_whistle";
+    data: MatchGUIDData & { winner_team_num: 0 | 1 };
+  }
   export interface GameRoundStarted {
-    data: "game_round_started_go";
+    data: MatchGUIDData;
     event: "game:round_started_go";
   }
 
@@ -106,7 +111,7 @@ export namespace SOS {
   }
 
   export interface GameReplayStart {
-    data: "game_replay_start" | MatchGUIDData;
+    data: MatchGUIDData;
     event: "game:replay_start";
   }
   export interface BallLastTouch {

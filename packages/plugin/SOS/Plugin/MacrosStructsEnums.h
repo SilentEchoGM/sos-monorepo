@@ -4,20 +4,19 @@
 extern std::shared_ptr<CVarManagerWrapper> globalCvarManager;
 
 // MACROS //
-#define SOS_VERSION_BASE "1.8.0"
+#define SOS_VERSION_BASE "1.8.1"
 #ifdef USE_NAMEPLATES
-    #define SOS_VERSION SOS_VERSION_BASE "-Nameplates"
+#define SOS_VERSION SOS_VERSION_BASE "-Nameplates"
 #else
-    #define SOS_VERSION SOS_VERSION_BASE
+#define SOS_VERSION SOS_VERSION_BASE
 #endif
 
 #define SHOULDLOG 1
 #if SHOULDLOG
-    #define LOGC(x) globalCvarManager->log(x)
+#define LOGC(x) globalCvarManager->log(x)
 #else
-    #define LOGC(x)
+#define LOGC(x)
 #endif
-
 
 // STRUCTS //
 
