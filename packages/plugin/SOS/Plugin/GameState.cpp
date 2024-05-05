@@ -15,7 +15,7 @@ void SOS::UpdateGameState(CanvasWrapper canvas)
     state["players"] = json::object();
     state["game"] = json::object();
     state["match_guid"] = CurrentMatchGuid;
-    state["silent_guid"] = SilentMatchGuid;
+    state["sos_match_guid"] = SilentMatchGuid;
 
     // Might want to change this to take MatchCreated into account?
     state["hasGame"] = true;
@@ -409,7 +409,7 @@ void SOS::GetLastTouchInfo(CarWrapper car, void *params)
     // Build ball touch event
     json ballTouchEvent;
     ballTouchEvent["match_guid"] = CurrentMatchGuid;
-    ballTouchEvent["silent_guid"] = SilentMatchGuid;
+    ballTouchEvent["sos_match_guid"] = SilentMatchGuid;
     ballTouchEvent["player"]["name"] = playerName;
     ballTouchEvent["player"]["id"] = playerID;
     ballTouchEvent["ball"]["pre_hit_speed"] = BallSpeed->GetCachedBallSpeed();
@@ -444,8 +444,8 @@ Vector2F SOS::GetGoalImpactLocation(BallWrapper ball, void *params)
         return {0, 0};
     }
 
-    //Get goal direction and correct rounding errors. Results should either be 0 or +-1
-    Vector GoalDirection = RT::Matrix3(goal.GetGoalOrientation().GetRotation()).forward;        
+    // Get goal direction and correct rounding errors. Results should either be 0 or +-1
+    Vector GoalDirection = RT::Matrix3(goal.GetGoalOrientation().GetRotation()).forward;
     GoalDirection.X = abs(GoalDirection.X) < .5f ? 0.f : GoalDirection.X / abs(GoalDirection.X);
     GoalDirection.Y = abs(GoalDirection.Y) < .5f ? 0.f : GoalDirection.Y / abs(GoalDirection.Y);
     GoalDirection.Z = abs(GoalDirection.Z) < .5f ? 0.f : GoalDirection.Z / abs(GoalDirection.Z);
@@ -479,7 +479,7 @@ void SOS::GetStatEventInfo(ServerWrapper caller, void *params)
     // General statfeed event
     json statfeed;
     statfeed["match_guid"] = CurrentMatchGuid;
-    statfeed["silent_guid"] = SilentMatchGuid;
+    statfeed["sos_match_guid"] = SilentMatchGuid;
 
     statfeed["event_name"] = eventName;
     statfeed["type"] = eventStr;

@@ -1,6 +1,6 @@
 {
   "name": "sos-plugin-types",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TypeScript typings and string constants for the SOS plugin for Bakkesmod",
   "main": "dist/index.js",
   "scripts": {

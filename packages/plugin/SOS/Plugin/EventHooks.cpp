@@ -245,7 +245,7 @@ void SOS::HookMatchCreated()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:match_created", event);
 }
 
@@ -258,7 +258,7 @@ void SOS::HookReplayCreated()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:replay_created", event);
 }
 
@@ -276,7 +276,7 @@ void SOS::HookMatchDestroyed()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:match_destroyed", event);
 }
 
@@ -294,7 +294,7 @@ void SOS::HookCountdownInit()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
 
     if (!firstCountdownHit && SOSUtils::ShouldRun(gameWrapper))
     {
@@ -325,7 +325,7 @@ void SOS::HookRoundStarted()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:round_started_go", event);
 }
 
@@ -346,7 +346,7 @@ void SOS::HookBallExplode()
 
         json event;
         event["match_guid"] = CurrentMatchGuid;
-        event["silent_guid"] = SilentMatchGuid;
+        event["sos_match_guid"] = SilentMatchGuid;
         Websocket->SendEvent("game:replay_will_end", event);
     }
     else
@@ -372,7 +372,7 @@ void SOS::HookGoalReplayStart()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:replay_start", event);
 }
 
@@ -382,7 +382,7 @@ void SOS::HookGoalReplayEnd()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:replay_end", event);
 }
 
@@ -398,7 +398,7 @@ void SOS::HookMatchEnded()
 
     json winnerData;
     winnerData["match_guid"] = CurrentMatchGuid;
-    winnerData["silent_guid"] = SilentMatchGuid;
+    winnerData["sos_match_guid"] = SilentMatchGuid;
 
     winnerData["winner_team_num"] = NULL;
 
@@ -422,7 +422,7 @@ void SOS::HookPodiumStart()
 {
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:podium_start", event);
 }
 

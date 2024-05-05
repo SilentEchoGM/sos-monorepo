@@ -3,7 +3,6 @@
 #include "Plugin/SOSUtils.h"
 #include <Plugin/SOS.h>
 
-
 ClockManager::ClockManager(std::shared_ptr<GameWrapper> InGameWrapper, std::shared_ptr<WebsocketManager> InWebsocketManager)
     : gameWrapper(InGameWrapper), Websocket(InWebsocketManager) {}
 
@@ -30,7 +29,7 @@ void ClockManager::StartClock(bool bResetCurrentDelta)
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:clock_started", event);
 }
 
@@ -40,7 +39,7 @@ void ClockManager::StopClock()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
     Websocket->SendEvent("game:clock_stopped", event);
 }
 
@@ -71,7 +70,7 @@ void ClockManager::OnClockUpdated()
     // Send the event even if the server is null and doesnt actually give the time
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["silent_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SilentMatchGuid;
 
     Websocket->SendEvent("game:clock_updated_seconds", event);
 }

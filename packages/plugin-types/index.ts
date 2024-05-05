@@ -84,7 +84,7 @@ export namespace SOS {
 
   export interface MatchGUIDData {
     match_guid: string;
-    silent_guid: string;
+    sos_match_guid: string;
   }
 
   export interface GameMisc {
@@ -153,7 +153,7 @@ export namespace SOS {
   export interface GameStatFeedEventData {
     main_target: Target;
     match_guid: string;
-    silent_guid: string;
+    sos_match_guid: string;
 
     secondary_target: Target;
     type: StatFeedEvent;
@@ -167,7 +167,7 @@ export namespace SOS {
   export interface GameBallHitData {
     ball: GameBallHitBallData;
     match_guid: string;
-    silent_guid: string;
+    sos_match_guid: string;
 
     player: BasicPlayer;
   }
@@ -244,7 +244,7 @@ export namespace SOS {
     game: Game;
     hasGame: boolean;
     match_guid: string;
-    silent_guid: string;
+    sos_match_guid: string;
     players: PlayersStore;
   }
 
@@ -285,8 +285,8 @@ export const isPacket = (possiblePacket: any): possiblePacket is SOS.Packet => {
 
 export const isSpecificPacket =
   <T extends SOS.Packet>(event: SOS.Event) =>
-  (possiblePacket: any): possiblePacket is T =>
-    possiblePacket?.event === event && "data" in possiblePacket;
+    (possiblePacket: any): possiblePacket is T =>
+      possiblePacket?.event === event && "data" in possiblePacket;
 
 export const isDatedPacket = (
   possiblePacket: any
