@@ -19,6 +19,7 @@ export const sosEvents = [
   "game:podium_start", //
   "game:match_destroyed", //
   "game:match_created", //
+  "game:final_whistle", //
   "sos:version",
 ] as const;
 

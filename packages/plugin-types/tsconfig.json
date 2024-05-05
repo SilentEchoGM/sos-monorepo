@@ -5,6 +5,8 @@
     "composite": true,
     "declarationMap": true,
     "incremental": true,
-    "lib": ["ES2015"]
-  }
+    "lib": ["ES2015"],
+    "moduleResolution": "node"
+  },
+  "include": ["index.ts"]
 }
