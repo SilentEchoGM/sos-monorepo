@@ -20,7 +20,7 @@ public:
 
 private:
     std::string CurrentMatchGuid;
-    std::string SilentMatchGuid;
+    std::string SOSCurrentMatchGuid;
 
     // CVARS
     std::shared_ptr<bool> cvarEnabled;

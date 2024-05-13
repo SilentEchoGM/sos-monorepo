@@ -29,7 +29,7 @@ void ClockManager::StartClock(bool bResetCurrentDelta)
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["sos_match_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SOSCurrentMatchGuid;
     Websocket->SendEvent("game:clock_started", event);
 }
 
@@ -39,7 +39,7 @@ void ClockManager::StopClock()
 
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["sos_match_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SOSCurrentMatchGuid;
     Websocket->SendEvent("game:clock_stopped", event);
 }
 
@@ -70,7 +70,7 @@ void ClockManager::OnClockUpdated()
     // Send the event even if the server is null and doesnt actually give the time
     json event;
     event["match_guid"] = CurrentMatchGuid;
-    event["sos_match_guid"] = SilentMatchGuid;
+    event["sos_match_guid"] = SOSCurrentMatchGuid;
 
     Websocket->SendEvent("game:clock_updated_seconds", event);
 }
