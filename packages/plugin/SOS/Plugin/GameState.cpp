@@ -53,7 +53,20 @@ void SOS::GetGameStateInfo(CanvasWrapper canvas, json &state)
         GetCameraInfo(state);
 
         LastGameStateCallTime = steady_clock::now();
+
         Websocket->SendEvent("game:update_state", state);
+
+        if (bZeroSecondGoalScoredRecently)
+        {
+            if (state["game"]["teams"][0]["score"] != state["game"]["teams"][1]["score"])
+            {
+                int winnerTeam = state["game"]["teams"][0]["score"] > state["game"]["teams"][1]["score"] ? 0 : 1;
+
+                HookOnFinalWhistle(winnerTeam);
+            }
+
+            bZeroSecondGoalScoredRecently = false;
+        }
     }
 
     // Nameplates - twice the rate of game state for better positioning fidelity?

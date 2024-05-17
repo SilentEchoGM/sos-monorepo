@@ -45,6 +45,7 @@ private:
 
     // NEW SOS VARIABLES
     bool bEarlyFinalWhistleBlown = false;
+    bool bZeroSecondGoalScoredRecently = false;
 
     // GOAL SCORED VARIABLES
     LastTouchInfo lastTouch;

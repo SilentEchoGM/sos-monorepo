@@ -92,6 +92,11 @@
     "xstring": "cpp",
     "xtr1common": "cpp",
     "xtree": "cpp",
-    "xutility": "cpp"
-  }
+    "xutility": "cpp",
+    "cinttypes": "cpp",
+    "random": "cpp",
+    "regex": "cpp",
+    "strstream": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }

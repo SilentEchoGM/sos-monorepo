@@ -6,6 +6,7 @@
 #include <chrono>
 #include <ctime>
 #include <string>
+#include <thread>
 
 void SOS::HookAllEvents()
 {
@@ -417,6 +418,8 @@ void SOS::HookPodiumStart()
     event["match_guid"] = CurrentMatchGuid;
     event["sos_match_guid"] = SOSCurrentMatchGuid;
     Websocket->SendEvent("game:podium_start", event);
+
+    bEarlyFinalWhistleBlown = false;
 }
 
 void SOS::HookStatEvent(ServerWrapper caller, void *params)
@@ -442,9 +445,17 @@ void SOS::HookOnFinalWhistle(int winnerTeamNum)
 bool SOS::CheckForEarlyFinalWhistle()
 {
     ServerWrapper server = SOSUtils::GetCurrentGameState(gameWrapper);
+
+    json state;
+    GetTeamInfo(state, server);
+
+    LOGC("Checking for early final whistle");
+    LOGC(state.dump());
+
     if (server.GetSecondsRemaining() == 0)
     {
-        return true;
+        bZeroSecondGoalScoredRecently = true;
+        return false;
     }
 
     if ((bool)server.GetbOverTime())
@@ -465,6 +476,7 @@ void SOS::HookReplayScoreDataChanged(ActorWrapper caller)
     {
         return;
     }
+    bZeroSecondGoalScoredRecently = true;
 
     PriWrapper ScoredBy(ScoreData.ScoredBy);
     std::string ScorerName, ScorerID;
@@ -488,8 +500,10 @@ void SOS::HookReplayScoreDataChanged(ActorWrapper caller)
     goalScoreData["ball_last_touch"]["speed"] = lastTouch.speed;     // Set in HookCarBallHit
     Websocket->SendEvent("game:goal_scored", goalScoreData);
 
-    if (CheckForEarlyFinalWhistle())
-    {
-        HookOnFinalWhistle(ScoreData.ScoreTeam);
-    }
+    using namespace std::chrono_literals;
+    using std::chrono::system_clock;
+
+    std::this_thread::sleep_for(50ms);
+
+    CheckForEarlyFinalWhistle();
 }
