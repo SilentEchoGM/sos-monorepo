@@ -200,16 +200,10 @@ void SOS::SaveMatchGuid()
         id = server.GetMatchGUID();
     }
 
-    using sc = std::chrono::system_clock;
-
     if (id.empty())
     {
-        std::time_t t = sc::to_time_t(sc::now());
-        char buf[20];
-        tm localTime;
-        localtime_s(&localTime, &t);
-        strftime(buf, 20, "%Y%m%d%H%M%S", &localTime);
-        CurrentMatchGuid = "LAN" + std::string(buf);
+        CurrentMatchGuid = "LAN" + GetNowString();
+        SOSCurrentMatchGuid = "LAN" + GetNowString();
     }
     else
     {
@@ -218,15 +212,14 @@ void SOS::SaveMatchGuid()
     }
 
     LOGC("MatchID: " + CurrentMatchGuid);
-    LOGC("SilentMatchID: " + SOSCurrentMatchGuid);
+    LOGC("SOSMatchID: " + SOSCurrentMatchGuid);
 
     Clock->UpdateCurrentMatchGuid(SOSCurrentMatchGuid);
 }
 
 void SOS::RemoveMatchGuid()
 {
-    LOGC("Removing MatchID: " + CurrentMatchGuid);
-    CurrentMatchGuid = "pending" + GetNowString();
+    LOGC("Removing SOSMatchID: " + SOSCurrentMatchGuid);
     SOSCurrentMatchGuid = "pending" + GetNowString();
     Clock->UpdateCurrentMatchGuid(SOSCurrentMatchGuid);
 }
