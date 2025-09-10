@@ -27,7 +27,6 @@ void SOS::HookAllEvents()
     gameWrapper->HookEventPost("Function GameEvent_Soccar_TA.Countdown.BeginState", std::bind(&SOS::HookCountdownInit, this));
     gameWrapper->HookEvent("Function GameEvent_Soccar_TA.Active.StartRound", std::bind(&SOS::HookRoundStarted, this));
     gameWrapper->HookEvent("Function TAGame.Ball_TA.Explode", std::bind(&SOS::HookBallExplode, this));
-    gameWrapper->HookEvent("Function TAGame.Ball_TA.EventCrossbarHit", std::bind(&SOS::HookCrossbarHit, this));
     gameWrapper->HookEventWithCaller<BallWrapper>("Function TAGame.Ball_TA.OnHitGoal", std::bind(&SOS::HookOnHitGoal, this, _1, _2));
     gameWrapper->HookEventPost("Function GameEvent_Soccar_TA.ReplayPlayback.BeginState", std::bind(&SOS::HookGoalReplayStart, this));
     gameWrapper->HookEventPost("Function GameEvent_Soccar_TA.ReplayPlayback.EndState", std::bind(&SOS::HookGoalReplayEnd, this));
@@ -354,24 +353,6 @@ void SOS::HookBallExplode()
     {
         bInPreReplayLimbo = true;
     }
-}
-
-void SOS::HookCrossbarHit()
-{
-    ServerWrapper server = SOSUtils::GetCurrentGameState(gameWrapper);
-    auto bw = server.GetBall();
-    auto loc = bw.GetLocation();
-
-    // LOGC("Crossbar hit!!!!");
-
-    json crossbarHitData;
-    crossbarHitData["ball_location"]["X"] = loc.X;
-    crossbarHitData["ball_location"]["Y"] = loc.Y;
-    crossbarHitData["ball_location"]["Z"] = loc.Z;
-    crossbarHitData["ball_speed"] = BallSpeed->GetCachedBallSpeed();
-    crossbarHitData["ball_last_touch"]["player"] = lastTouch.playerID; // Set in HookCarBallHit
-    crossbarHitData["ball_last_touch"]["speed"] = lastTouch.speed;     // Set in HookCarBallHit
-    Websocket->SendEvent("game:crossbar_hit", crossbarHitData);
 }
 
 void SOS::HookOnHitGoal(BallWrapper ball, void *params)

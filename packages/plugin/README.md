@@ -160,19 +160,7 @@ The websocket reports the following events in `channel:event` format:
     "winner_team_num": "number"
   },
   "game:podium_start": "string",
-  "game:match_destroyed": "string",
-  "game:crossbar_hit": {
-    "ball_location": {
-      "X": "number",
-      "Y": "number",
-      "Z": "number",
-    },
-    "ball_speed": "number",
-    "ball_last_touch": {
-      "player": "string",
-      "speed": "number"
-    },
-  }
+  "game:match_destroyed": "string"
 }
 ```
 
