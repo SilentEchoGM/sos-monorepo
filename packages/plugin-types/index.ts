@@ -8,6 +8,7 @@ export const sosEvents = [
   "game:round_started_go", //
   "game:clock_started", //
   "game:ball_hit", //
+  "game:crossbar_hit",
   "game:clock_updated_seconds", //
   "game:statfeed_event", //
   "game:clock_stopped", //
@@ -67,9 +68,9 @@ export const miscEvents = [
 ] as const;
 
 export namespace SOS {
-  export type Event = typeof sosEvents[number];
+  export type Event = (typeof sosEvents)[number];
 
-  export type StatFeedEvent = typeof sosStatFeedEvents[number];
+  export type StatFeedEvent = (typeof sosStatFeedEvents)[number];
   export interface Location {
     X: number;
     Y: number;
@@ -89,7 +90,7 @@ export namespace SOS {
 
   export interface GameMisc {
     data: MatchGUIDData;
-    event: typeof miscEvents[number];
+    event: (typeof miscEvents)[number];
   }
 
   export interface GameMatchEnded {
@@ -175,6 +176,17 @@ export namespace SOS {
   export interface GameBallHit {
     data: GameBallHitData;
     event: "game:ball_hit";
+  }
+
+  export interface GameCrossbarHitData {
+    ball_location: Location;
+    ball_last_touch: BallLastTouch;
+    ball_speed: number;
+  }
+
+  export interface GameCrossbarHit {
+    data: GameCrossbarHitData;
+    event: "game:crossbar_hit";
   }
 
   export interface Player {
@@ -269,7 +281,7 @@ export namespace SOS {
     | GameMisc
     | SOSVersion;
 
-  export type GameState = typeof gameStates[number];
+  export type GameState = (typeof gameStates)[number];
 }
 
 export type DatedPacket<T extends SOS.Packet = SOS.Packet> = T & {
@@ -285,8 +297,8 @@ export const isPacket = (possiblePacket: any): possiblePacket is SOS.Packet => {
 
 export const isSpecificPacket =
   <T extends SOS.Packet>(event: SOS.Event) =>
-    (possiblePacket: any): possiblePacket is T =>
-      possiblePacket?.event === event && "data" in possiblePacket;
+  (possiblePacket: any): possiblePacket is T =>
+    possiblePacket?.event === event && "data" in possiblePacket;
 
 export const isDatedPacket = (
   possiblePacket: any
