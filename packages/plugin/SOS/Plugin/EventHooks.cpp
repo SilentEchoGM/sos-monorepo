@@ -210,6 +210,7 @@ void SOS::SaveMatchGuid()
         localtime_s(&localTime, &t);
         strftime(buf, 20, "%Y%m%d%H%M%S", &localTime);
         CurrentMatchGuid = "LAN" + std::string(buf);
+        SilentMatchGuid = "LAN" + std::string(buf);
     }
     else
     {
