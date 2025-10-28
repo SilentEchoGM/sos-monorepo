@@ -60,6 +60,7 @@ private:
     void HookAllEvents();
     void HookViewportTick(CanvasWrapper canvas);
     void HookBallExplode();
+    void HookCrossbarHit();
     void HookOnHitGoal(BallWrapper ball, void *params);
     void HookInitTeams();
     std::string GetNowString();
