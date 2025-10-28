@@ -4,7 +4,7 @@
 extern std::shared_ptr<CVarManagerWrapper> globalCvarManager;
 
 // MACROS //
-#define SOS_VERSION_BASE "1.8.2"
+#define SOS_VERSION_BASE "1.9.0"
 #ifdef USE_NAMEPLATES
 #define SOS_VERSION SOS_VERSION_BASE "-Nameplates"
 #else
