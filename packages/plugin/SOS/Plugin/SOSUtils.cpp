@@ -23,14 +23,14 @@ bool SOSUtils::ShouldRun(std::shared_ptr<GameWrapper> gameWrapper)
     // Allow in replay mode
     if (gameWrapper->IsInReplay())
     {
-        LOGC("gameWrapper->IsInReplay(): (need true) true");
+        // LOGC("gameWrapper->IsInReplay(): (need true) true");
         return true;
     }
 
     // Check if player is spectating
     if (!gameWrapper->GetLocalCar().IsNull())
     {
-        LOGC("GetLocalCar().IsNull(): (need true) false");
+        // LOGC("GetLocalCar().IsNull(): (need true) false");
         return false;
     }
 
