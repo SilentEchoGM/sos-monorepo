@@ -4,6 +4,7 @@
 - handles LAN matches
 - fixed multi-platform player ids
 - added "isBoosting" prop to player objects
+- added crossbar_hit event
 
 # SOS Overlay System - Original Readme
 SOS-Plugin aims to provide an easy to use event relay in use for Esports broadcasts, particularily in the Tournament sector. Personal streams are able to use this, but it is not officially supported at this moment.
